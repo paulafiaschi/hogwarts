@@ -50,18 +50,27 @@ function prepareObjects(jsonData) {
 
 function preapareObject(jsonObject) {
   const student = Object.create(Student);
-
+  const house = jsonObject.house.trim();
   const fullname = jsonObject.fullname.trim();
+  // const allNames = fullname.split(" ");
+
   const firstSpace = fullname.indexOf(" ");
   const secondSpace = fullname.indexOf(" ", firstSpace + 1);
   const lastSpace = fullname.lastIndexOf(" ");
 
   const name = fullname.substring(0, firstSpace);
+  const middlename = fullname.substring(firstSpace + 1, lastSpace);
   const lastname = fullname.substring(lastSpace + 1);
 
+  // if (allNames.length > 2) {
+  //   let middlename;
+  //   return (middlename = fullname.substring(secondSpace + 1, lastSpace));
+  // }
+
   student.firstName = name.charAt(0).toUpperCase() + name.substring(1).toLowerCase();
+  student.middleName = middlename.charAt(0).toUpperCase() + middlename.substring(1).toLowerCase();
   student.lastName = lastname.charAt(0).toUpperCase() + lastname.substring(1).toLowerCase();
-  student.house = jsonObject.house.charAt(0).toUpperCase() + jsonObject.house.substring(1).toLowerCase();
+  student.house = house.charAt(0).toUpperCase() + house.substring(1).toLowerCase();
   student.age = jsonObject.age;
   student.star = true;
 
@@ -92,6 +101,7 @@ function displayStudent(student) {
 
   clone.querySelector("[data-field=firstName]").textContent = student.firstName;
   // console.log(student.firstName + " is the student name");
+  clone.querySelector("[data-field=middleName]").textContent = student.middleName;
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
   clone.querySelector("[data-field=house]").textContent = student.house;
   clone.querySelector("[data-field=blood]").textContent = student.bloodStatus;
