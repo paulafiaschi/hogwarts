@@ -12,15 +12,15 @@ const settings = {
 
 // The prototype for all students:
 const Student = {
-  firstName: "",
-  middleName: "",
-  lastName: "",
-  nickname: "",
-  gender: "",
-  house: "",
-  desc: "-unknown-",
-  bloodStatus: "",
-  age: 0,
+  firstName: "Harry",
+  middleName: "James",
+  lastName: "Potter",
+  nickname: "The chosen one",
+  gender: "male",
+  house: "Gryffindor",
+  desc: "A very wise magician",
+  bloodStatus: "Pure blood",
+  age: 18,
   expelled: false,
   perfect: false,
   inqSquad: false,
@@ -33,6 +33,7 @@ function start() {
   loadJSON();
 
   // FUTURE: Add event-listeners to filter and sort buttons
+  selectStudent();
   registerButtons();
 }
 
@@ -177,4 +178,15 @@ function filterExpulsion(studentExpulsion) {
   function isNotExpelled() {
     return student.expelled === false;
   }
+}
+
+// open pop up
+function selectStudent() {
+  document.querySelector(".studentRow").addEventListener("click", openPopUp);
+}
+function openPopUp() {
+  document.querySelector(".popUp").classList.remove("hide");
+  document.querySelector(".popUp").classList.add("visible");
+
+  console.log("pop up");
 }

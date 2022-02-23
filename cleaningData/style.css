@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "harryFont";
+  src: url(/cleaningData/harryP.TTF);
+}
+
+body {
+  background-image: url(/cleaningData/pexels-cottonbro-9694209.png);
+  color: white;
+}
+
+h1 {
+  font-family: "harryFont";
+  font-size: 5rem;
+  text-align: center;
+}
+
+th,
+td {
+  border: solid 1px white;
+  padding: 1rem 2rem;
+}
+
+.popUp {
+  position: absolute;
+  top: 20vw;
+  left: 20vw;
+  background-color: aqua;
+  width: 20vw;
+  height: 20vw;
+}
+
+.hide {
+  display: none;
+}
+
+.visible {
+  display: block;
+}

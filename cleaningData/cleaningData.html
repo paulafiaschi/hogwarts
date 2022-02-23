@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cleaning Data</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -33,7 +34,7 @@
         <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
         <th data-action="sort" data-sort-direction="asc" data-sort="expelled">Expelled</th>
         <th data-action="sort" data-sort-direction="asc" data-sort="age">Age</th>
-        <th></th>
+
       </tr>
     </thead>
     <tbody>
@@ -42,7 +43,7 @@
   </table>
 
   <template id="student">
-    <tr>
+    <tr class="studentRow">
       <td data-field="star">⭐</td>
       <td data-field="firstName">FIRST NAME</td>
       <td data-field="middleName">MIDDLE NAME</td>
@@ -52,6 +53,25 @@
       <td data-field="blood">AGE</td>
     </tr>
   </template>
+  <!-- <template id="popUp"> -->
+  <div class="popUp ">
+    <div><img src="" alt=""></div>
+    <div class="name1">Harry</div>
+    <div class="name2">James</div>
+    <div class="alias">James</div>
+    <div class="surname">Potter</div>
+    <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, eius laboriosam dolores ab
+      eligendi ad! Inventore itaque autem dolorum ducimus rerum nam odio veniam aliquam ab, eveniet eum nobis voluptas.
+    </div>
+    <div class="housecrest"><img src="" alt="" class="crest"></div>
+    <div class="perfect"></div>
+    <div class="expulsion">
+      <button>expell student</button>
+    </div>
+    <div class="inqSquad"></div>
+
+  </div>
+  <!-- </template> -->
 
   <script src="script2.js"></script>
 </body>
