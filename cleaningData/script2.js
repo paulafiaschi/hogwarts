@@ -117,3 +117,30 @@ function displayStudent(student) {
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
 }
+
+function filterHouses(studentHouse) {
+  let filteredList;
+  if (studentHouse === "Gryffindor") {
+    filteredList = allStudents.filter(isGryffindor);
+  } else if (studentHouse === "Slytherin") {
+    filteredList = allStudents.filter(isSlytherin);
+  } else if (studentHouse === "Ravenclaw") {
+    filteredList = allStudents.filter(isRavenclaw);
+  } else if (studentHouse === "Hufflepuff") {
+    filteredList = allStudents.filter(isHufflepuff);
+  }
+  displayList(filteredList);
+}
+
+function isGryffindor(student) {
+  return student.house === "Gryffindor";
+}
+function isSlytherin(student) {
+  return student.house === "Slytherin";
+}
+function isRavenclaw(student) {
+  return student.house === "Ravenclaw";
+}
+function isHufflepuff(student) {
+  return student.house === "Hufflepuff";
+}
