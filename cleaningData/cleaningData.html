@@ -10,7 +10,43 @@
 
 <body>
 
-  <script src="script.js"></script>
+  <h1>Hogwarts Student Database</h1>
+  <p>
+    Filter:
+    <button class="filter" data-action="filter" data-filter="cat">Only Cats</button>
+    <button class="filter" data-action="filter" data-filter="dog">Only Dogs</button>
+    <button class="filter" data-action="filter" data-filter="*">all</button>
+  </p>
+
+  <hr />
+
+  <table id="list">
+    <thead>
+      <tr id="sorting">
+        <th data-action="sort" data-sort-direction="asc" data-sort="star">⭐</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="name">Name</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="type">Type</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="desc">Description</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="age">Age</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- animal template will be copied and inserted here -->
+    </tbody>
+  </table>
+
+  <template id="animal">
+    <tr>
+      <td data-field="star">⭐</td>
+      <td data-field="name">NAME</td>
+      <td data-field="type">TYPE</td>
+      <td data-field="desc">DESCRIPTION</td>
+      <td data-field="age">AGE</td>
+    </tr>
+  </template>
+
+  <script src="script2.js"></script>
 </body>
 
 </html>
