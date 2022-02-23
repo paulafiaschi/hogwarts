@@ -13,9 +13,12 @@
   <h1>Hogwarts Student Database</h1>
   <p>
     Filter:
-    <button class="filter" data-action="filter" data-filter="cat">Only Cats</button>
-    <button class="filter" data-action="filter" data-filter="dog">Only Dogs</button>
+    <button class="filter" data-action="filter" data-filter="Gryffindor">Only Gryffindor</button>
+    <button class="filter" data-action="filter" data-filter="Slytherin">Only Slytherin</button>
+    <button class="filter" data-action="filter" data-filter="Ravenclaw">Only Ravenclaw</button>
+    <button class="filter" data-action="filter" data-filter="Hufflepuff">Only Hufflepuff</button>
     <button class="filter" data-action="filter" data-filter="*">all</button>
+    <button class="filter" data-action="filter" data-filter="expelled">expelled</button>
   </p>
 
   <hr />
@@ -28,6 +31,7 @@
         <th data-action="sort" data-sort-direction="asc" data-sort="mName">Middle Name</th>
         <th data-action="sort" data-sort-direction="asc" data-sort="lName">Last Name</th>
         <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="expelled">Expelled</th>
         <th data-action="sort" data-sort-direction="asc" data-sort="age">Age</th>
         <th></th>
       </tr>
@@ -44,6 +48,7 @@
       <td data-field="middleName">MIDDLE NAME</td>
       <td data-field="lastName">LAST NAME</td>
       <td data-field="house">HOUSE</td>
+      <td data-field="expelled">EXPELLED</td>
       <td data-field="blood">AGE</td>
     </tr>
   </template>

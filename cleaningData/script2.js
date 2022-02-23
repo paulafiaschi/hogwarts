@@ -21,6 +21,7 @@ const Student = {
   desc: "-unknown-",
   bloodStatus: "",
   age: 0,
+  expelled: false,
   perfect: false,
   inqSquad: false,
   star: false,
@@ -32,6 +33,11 @@ function start() {
   loadJSON();
 
   // FUTURE: Add event-listeners to filter and sort buttons
+  registerButtons();
+}
+
+function registerButtons() {
+  document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
 }
 
 async function loadJSON() {
@@ -52,20 +58,13 @@ function preapareObject(jsonObject) {
   const student = Object.create(Student);
   const house = jsonObject.house.trim();
   const fullname = jsonObject.fullname.trim();
-  // const allNames = fullname.split(" ");
 
   const firstSpace = fullname.indexOf(" ");
-  const secondSpace = fullname.indexOf(" ", firstSpace + 1);
   const lastSpace = fullname.lastIndexOf(" ");
 
   const name = fullname.substring(0, firstSpace);
   const middlename = fullname.substring(firstSpace + 1, lastSpace);
   const lastname = fullname.substring(lastSpace + 1);
-
-  // if (allNames.length > 2) {
-  //   let middlename;
-  //   return (middlename = fullname.substring(secondSpace + 1, lastSpace));
-  // }
 
   student.firstName = name.charAt(0).toUpperCase() + name.substring(1).toLowerCase();
   student.middleName = middlename.charAt(0).toUpperCase() + middlename.substring(1).toLowerCase();
@@ -128,6 +127,13 @@ function displayStudent(student) {
   document.querySelector("#list tbody").appendChild(clone);
 }
 
+function selectFilter(event) {
+  const filter = event.target.dataset.filter;
+  // console.log(`user selected ${filter} `);
+  filterHouses(filter);
+}
+
+// filter houses
 function filterHouses(studentHouse) {
   let filteredList;
   if (studentHouse === "Gryffindor") {
@@ -139,6 +145,7 @@ function filterHouses(studentHouse) {
   } else if (studentHouse === "Hufflepuff") {
     filteredList = allStudents.filter(isHufflepuff);
   }
+  // missing "all houses"
   displayList(filteredList);
 }
 
@@ -153,4 +160,21 @@ function isRavenclaw(student) {
 }
 function isHufflepuff(student) {
   return student.house === "Hufflepuff";
+}
+
+// filter expelled or not expelled
+function filterExpulsion(studentExpulsion) {
+  let filteredList;
+  if (studentExpulsion === true) {
+    filteredList = allStudents.filter(isExpelled);
+  } else if (studentExpulsion === false) {
+    filteredList = allStudents.filter(isNotExpelled);
+  }
+
+  function isExpelled() {
+    return student.expelled === true;
+  }
+  function isNotExpelled() {
+    return student.expelled === false;
+  }
 }
