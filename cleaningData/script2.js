@@ -43,7 +43,7 @@ async function loadJSON() {
 }
 
 function prepareObjects(jsonData) {
-  allAnimals = jsonData.map(preapareObject);
+  allStudents = jsonData.map(preapareObject);
 
   buildList();
 }
@@ -61,23 +61,59 @@ function preapareObject(jsonObject) {
 
   student.firstName = name.charAt(0).toUpperCase() + name.substring(1).toLowerCase();
   student.lastName = lastname.charAt(0).toUpperCase() + lastname.substring(1).toLowerCase();
-  student.house = student.house.charAt(0).toUpperCase() + student.house.substring(1).toLowerCase();
+  student.house = jsonObject.house.charAt(0).toUpperCase() + jsonObject.house.substring(1).toLowerCase();
   student.age = jsonObject.age;
   student.star = true;
 
-  return animal;
+  allStudents.push(student);
+  return student;
 }
 
 function buildList() {
-  const currentList = allAnimals; // FUTURE: Filter and sort currentList before displaying
+  const currentList = allStudents; // FUTURE: Filter and sort currentList before displaying
 
   displayList(currentList);
 }
 
-function displayList(animals) {
+function displayList(students) {
   // clear the display
   document.querySelector("#list tbody").innerHTML = "";
 
   // build a new list
-  animals.forEach(displayAnimal);
+  students.forEach(displayStudent);
+}
+
+function displayStudent(student) {
+  // console.log("display students");
+  // create clone
+  const clone = document.querySelector("#student").content.cloneNode(true);
+
+  // set clone data
+
+  clone.querySelector("[data-field=firstName]").textContent = student.firstName;
+  // console.log(student.firstName + " is the student name");
+  clone.querySelector("[data-field=lastName]").textContent = student.lastName;
+  clone.querySelector("[data-field=house]").textContent = student.house;
+  clone.querySelector("[data-field=blood]").textContent = student.bloodStatus;
+
+  // if (animal.star === true) {
+  //   clone.querySelector("[data-field=star]").textContent = "🌟";
+  // } else {
+  //   clone.querySelector("[data-field=star]").textContent = "★";
+  // }
+
+  // clone.querySelector("[data-field=star]").addEventListener("click", toggleStar);
+
+  // function toggleStar() {
+  //   if (animal.star === true) {
+  //     animal.star = false;
+  //   } else {
+  //     animal.star = true;
+  //   }
+  // console.log("star clicked " + animal.star);
+  // buildList();
+  // }
+
+  // append clone to list
+  document.querySelector("#list tbody").appendChild(clone);
 }
