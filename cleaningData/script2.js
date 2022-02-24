@@ -246,18 +246,18 @@ function expellStudent(student) {
 
 function tryToMakePerfect(selectedStudent) {
   const perfects = allStudents.filter((student) => student.perfect);
-  const numPerfects = perfects.length;
-  const other = perfects.filter((student) => student.house === selectedStudent.house);
+  const others = perfects.filter((student) => student.house === selectedStudent.house);
 
-  console.log(`the house is  ${selectedStudent.house}`);
-  console.log(`there are already ${numPerfects} perfects`);
-  console.log(`the other winner of this house is ${other.firstName}`);
+  // console.log(`the house is  ${selectedStudent.house}`);
+  // console.log(`there are already ${numPerfects} perfects`);
+  // console.log(`the other winner of this house is ${other.firstName}`);
 
   makePerfect(selectedStudent);
 
-  if (other.length >= 2) {
+  if (others.length >= 2) {
     console.log("there can only be two winners from this house");
-    removeAorB(perfects[0], perfects[1]);
+    // removeAorB(others[0], others[1]);
+    makePerfect(selectedStudent);
     document.querySelector("#removeOther").classList.remove("hide");
     document.querySelector(".closebutton").addEventListener("click", closeWindow);
     document.querySelector("#removeA").addEventListener("click", clickRemoveA);
@@ -271,31 +271,40 @@ function tryToMakePerfect(selectedStudent) {
     document.querySelector(".closebutton").removeEventListener("click", closeWindow);
     document.querySelector("#removeA").removeEventListener("click", clickRemoveA);
     document.querySelector("#removeB").removeEventListener("click", clickRemoveB);
+  }
+  function clickRemoveA(perfectA) {
+    // perfectA.perfect = false;
+    removePerfect(others[0]);
 
-    function clickRemoveA() {
-      removePerfect(perfectA);
-      makePerfect(selectedStudent);
-      buildList();
-      closeWindow();
-    }
-    function clickRemoveB() {
-      removePerfect(perfectB);
-      makePerfect(selectedStudent);
-      buildList();
-      closeWindow();
-    }
+    // makePerfect(selectedStudent);
+    buildList();
+    closeWindow();
+  }
+  function clickRemoveB(perfectB) {
+    removePerfect(others[1]);
+    makePerfect(selectedStudent);
+    buildList();
+    closeWindow();
   }
 
   function removeAorB(perfectA, perfectB) {
-    removePerfect(perfectA);
-    makePerfect(selectedStudent);
-    // else
-    removePerfect(perfectB);
-    makePerfect(selectedStudent);
+    document.querySelector("#removeOther").classList.remove("hide");
+    document.querySelector(".closebutton").addEventListener("click", closeWindow);
+    document.querySelector("#removeA").addEventListener("click", clickRemoveA);
+    document.querySelector("#removeB").addEventListener("click", clickRemoveB);
   }
+  //   removePerfect(perfectA);
+  //   makePerfect(selectedStudent);
+  //   // else
+  //   removePerfect(perfectB);
+  //   makePerfect(selectedStudent);
+  // }
 
   function removePerfect(studentPerfect) {
+    console.log(studentPerfect);
     studentPerfect.perfect = false;
+    console.log(`removed ${studentPerfect.firstName} from ${studentPerfect.house}'s perfect list`);
+    buildList();
   }
 
   function makePerfect(student) {
