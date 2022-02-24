@@ -72,7 +72,7 @@ function preapareObject(jsonObject) {
   student.lastName = lastname.charAt(0).toUpperCase() + lastname.substring(1).toLowerCase();
   student.house = house.charAt(0).toUpperCase() + house.substring(1).toLowerCase();
   student.age = jsonObject.age;
-  student.star = true;
+  student.perfect = false;
 
   allStudents.push(student);
   return student;
@@ -112,15 +112,19 @@ function displayStudent(student) {
   clone.querySelector("button").textContent = "Expell " + student.lastName + "?";
 
   clone.querySelector("[data-field=expelled]").addEventListener("click", expellStudent);
-  clone.querySelector("[data-field=perfect]").addEventListener("click", clickPerfect);
 
   clone.querySelector("[data-field=perfect]").dataset.perfect = student.perfect;
+  clone.querySelector("[data-field=perfect]").addEventListener("click", clickPerfect);
+
   function clickPerfect() {
+    console.log("clicked perfect");
     if (student.perfect === true) {
       student.perfect = false;
     } else {
+      // student.perfect = true;
       tryToMakePerfect(student);
     }
+    buildList();
   }
 
   // append clone to list
@@ -243,34 +247,58 @@ function expellStudent(student) {
 function tryToMakePerfect(selectedStudent) {
   const perfects = allStudents.filter((student) => student.perfect);
   const numPerfects = perfects.length;
-  const other = perfects.filter((student) => student.house === selectedStudent.house.shift());
+  const other = perfects.filter((student) => student.house === selectedStudent.house);
 
-  if (other !== undefined) {
-    removeOther(other);
-  } else if (numPerfects >= 2) {
+  console.log(`the house is  ${selectedStudent.house}`);
+  console.log(`there are already ${numPerfects} perfects`);
+  console.log(`the other winner of this house is ${other.firstName}`);
+
+  makePerfect(selectedStudent);
+
+  if (other.length >= 2) {
+    console.log("there can only be two winners from this house");
     removeAorB(perfects[0], perfects[1]);
+    document.querySelector("#removeOther").classList.remove("hide");
+    document.querySelector(".closebutton").addEventListener("click", closeWindow);
+    document.querySelector("#removeA").addEventListener("click", clickRemoveA);
+    document.querySelector("#removeB").addEventListener("click", clickRemoveB);
   } else {
-    makePerefct(selectedStudent);
+    makePerfect(selectedStudent);
   }
 
-  function removeOther(otherPerfect) {
-    removePerfect(other);
-    makePerefct(selectedStudent);
+  function closeWindow() {
+    document.querySelector("#removeOther").classList.add("hide");
+    document.querySelector(".closebutton").removeEventListener("click", closeWindow);
+    document.querySelector("#removeA").removeEventListener("click", clickRemoveA);
+    document.querySelector("#removeB").removeEventListener("click", clickRemoveB);
+
+    function clickRemoveA() {
+      removePerfect(perfectA);
+      makePerfect(selectedStudent);
+      buildList();
+      closeWindow();
+    }
+    function clickRemoveB() {
+      removePerfect(perfectB);
+      makePerfect(selectedStudent);
+      buildList();
+      closeWindow();
+    }
   }
 
   function removeAorB(perfectA, perfectB) {
     removePerfect(perfectA);
-    makePerefct(selectedStudent);
+    makePerfect(selectedStudent);
     // else
     removePerfect(perfectB);
-    makePerefct(selectedStudent);
+    makePerfect(selectedStudent);
   }
 
   function removePerfect(studentPerfect) {
     studentPerfect.perfect = false;
   }
 
-  function makePerefct(student) {
+  function makePerfect(student) {
     student.perfect = true;
   }
 }

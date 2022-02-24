@@ -66,6 +66,7 @@ td[data-field="perfect"][data-perfect="false"]::after {
   padding: 2rem;
   background-color: wheat;
   position: relative;
+  color: black;
 }
 
 .closebutton {
