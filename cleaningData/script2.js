@@ -31,10 +31,9 @@ function start() {
   console.log("ready");
 
   loadJSON();
-
-  // FUTURE: Add event-listeners to filter and sort buttons
-  // selectStudent();
   registerButtons();
+
+  // selectStudent();
 }
 
 function registerButtons() {
@@ -94,14 +93,14 @@ function displayList(students) {
 }
 
 function displayStudent(student) {
-  // console.log("display students");
+  // const index = allStudents.indexOf(student);
+  // console.log(`The student ${student.name} has an index of: ${index}`);
+
   // create clone
   const clone = document.querySelector("#student").content.cloneNode(true);
 
   // set clone data
-
   clone.querySelector("[data-field=firstName]").textContent = student.firstName;
-  // console.log(student.firstName + " is the student name");
   clone.querySelector("[data-field=middleName]").textContent = student.middleName;
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
   clone.querySelector("[data-field=house]").textContent = student.house;
@@ -111,13 +110,16 @@ function displayStudent(student) {
   clone.querySelector(".surname").textContent = student.lastName;
 
   clone.querySelector("button").textContent = "Expell " + student.lastName + "?";
-  clone.querySelector("button").addEventListener("click", expellStudent);
+  clone.querySelector(".view-more").addEventListener("click", expellStudent);
+  console.log(student.firstName + " st index: " + allStudents.indexOf(student));
 
-  // if (animal.star === true) {
-  //   clone.querySelector("[data-field=star]").textContent = "🌟";
-  // } else {
-  //   clone.querySelector("[data-field=star]").textContent = "★";
-  // }
+  clone.querySelector("[data-field=perfect]").dataset.perfect = true;
+
+  if (student.perfect === true) {
+    clone.querySelector("[data-field=perfect]").textContent = "🏅";
+  } else {
+    clone.querySelector("[data-field=perfect]").textContent = "";
+  }
 
   // clone.querySelector("[data-field=star]").addEventListener("click", toggleStar);
 
@@ -153,7 +155,7 @@ function filterHouses(studentHouse) {
   } else if (studentHouse === "Hufflepuff") {
     filteredList = allStudents.filter(isHufflepuff);
   }
-  // missing "all houses"
+  // !missing "all houses"
   displayList(filteredList);
 }
 
