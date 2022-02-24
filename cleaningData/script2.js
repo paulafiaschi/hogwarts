@@ -39,6 +39,7 @@ function start() {
 
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
+  document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
 }
 
 async function loadJSON() {
@@ -136,7 +137,7 @@ function displayStudent(student) {
 
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
-  // console.log(`user selected ${filter} `);
+  console.log(`user selected ${filter} `);
   filterHouses(filter);
 }
 
@@ -186,12 +187,18 @@ function filterExpulsion(studentExpulsion) {
   }
 }
 
+function selectSort(event) {
+  const sortBy = event.target.dataset.sort;
+  console.log(`user selected ${sortBy} `);
+  sortList(sortBy);
+}
+
 function sortList(sortBy) {
   let sortedList = allStudents;
 
-  if (sortBy === "name") {
+  if (sortBy === "fName") {
     sortedList = sortedList.sort(sortByName);
-  } else if (sortBy === "surname") {
+  } else if (sortBy === "lName") {
     sortedList = sortedList.sort(sortBySurname);
   } else if (sortBy === "house") {
     sortedList = sortedList.sort(sortByHouse);
