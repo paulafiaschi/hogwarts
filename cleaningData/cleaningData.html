@@ -28,12 +28,14 @@
     <thead>
       <tr id="sorting">
         <th data-action="sort" data-sort-direction="asc" data-sort="star">⭐</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="lName">Last Name</th>
         <th data-action="sort" data-sort-direction="asc" data-sort="fName">First Name</th>
         <th data-action="sort" data-sort-direction="asc" data-sort="mName">Middle Name</th>
-        <th data-action="sort" data-sort-direction="asc" data-sort="lName">Last Name</th>
+        <th data-action="sort" data-sort-direction="asc" data-sort="aliasNamr">Alias</th>
         <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
         <th data-action="sort" data-sort-direction="asc" data-sort="expelled">Expelled</th>
         <th data-action="sort" data-sort-direction="asc" data-sort="age">Age</th>
+        <th>Description</th>
 
       </tr>
     </thead>
@@ -45,32 +47,35 @@
   <template id="student">
     <tr class="studentRow">
       <td data-field="star">⭐</td>
+      <td data-field="lastName">LAST NAME</td>
       <td data-field="firstName">FIRST NAME</td>
       <td data-field="middleName">MIDDLE NAME</td>
-      <td data-field="lastName">LAST NAME</td>
+      <td data-field="nickname">NICKNAME</td>
       <td data-field="house">HOUSE</td>
       <td data-field="expelled">EXPELLED</td>
       <td data-field="blood">AGE</td>
+      <td class="view-more"><a href="">Read more</a></td>
     </tr>
-  </template>
-  <!-- <template id="popUp"> -->
-  <div class="popUp ">
-    <div><img src="" alt=""></div>
-    <div class="name1">Harry</div>
-    <div class="name2">James</div>
-    <div class="alias">James</div>
-    <div class="surname">Potter</div>
-    <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, eius laboriosam dolores ab
-      eligendi ad! Inventore itaque autem dolorum ducimus rerum nam odio veniam aliquam ab, eveniet eum nobis voluptas.
-    </div>
-    <div class="housecrest"><img src="" alt="" class="crest"></div>
-    <div class="perfect"></div>
-    <div class="expulsion">
-      <button>expell student</button>
-    </div>
-    <div class="inqSquad"></div>
+    <!-- <template id="popUp"> -->
+    <div class="popUp hide">
+      <div><img src="#" alt=""></div>
+      <div class="names"> <span class="name1">Harry </span><span class="alias">wizard</span> <span
+          class="name2">James</span> <span class="surname">Potter</span>
 
-  </div>
+        <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, eius laboriosam dolores ab
+          eligendi ad! Inventore itaque autem dolorum ducimus rerum nam odio veniam aliquam ab, eveniet eum nobis
+          voluptas.
+        </div>
+        <div class="housecrest"><img src="#" alt="" class="crest"></div>
+        <div class="perfect"></div>
+        <div class="expulsion">
+          <button>expell student</button>
+        </div>
+        <div class="inqSquad"></div>
+
+      </div>
+    </div>
+  </template>
   <!-- </template> -->
 
   <script src="script2.js"></script>

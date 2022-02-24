@@ -33,7 +33,7 @@ function start() {
   loadJSON();
 
   // FUTURE: Add event-listeners to filter and sort buttons
-  selectStudent();
+  // selectStudent();
   registerButtons();
 }
 
@@ -105,6 +105,12 @@ function displayStudent(student) {
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
   clone.querySelector("[data-field=house]").textContent = student.house;
   clone.querySelector("[data-field=blood]").textContent = student.bloodStatus;
+  clone.querySelector(".name1").textContent = student.firstName;
+  clone.querySelector(".name2").textContent = student.middleName;
+  clone.querySelector(".surname").textContent = student.lastName;
+
+  clone.querySelector("button").textContent = "Expell " + student.lastName + "?";
+  clone.querySelector("button").addEventListener("click", expellStudent);
 
   // if (animal.star === true) {
   //   clone.querySelector("[data-field=star]").textContent = "🌟";
@@ -180,13 +186,57 @@ function filterExpulsion(studentExpulsion) {
   }
 }
 
-// open pop up
-function selectStudent() {
-  document.querySelector(".studentRow").addEventListener("click", openPopUp);
+function sortList(sortBy) {
+  let sortedList = allStudents;
+
+  if (sortBy === "name") {
+    sortedList = sortedList.sort(sortByName);
+  } else if (sortBy === "surname") {
+    sortedList = sortedList.sort(sortBySurname);
+  } else if (sortBy === "house") {
+    sortedList = sortedList.sort(sortByHouse);
+  }
+  displayList(sortedList);
 }
+
+function sortByName(stA, stB) {
+  if (stA.name < stB.name) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+function sortBySurname(stA, stB) {
+  if (stA.lastName < stB.lastName) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+function sortByHouse(stA, stB) {
+  if (stA.house < stB.house) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+// open pop up
+// function selectStudent() {
+//   document.querySelector("view-more").addEventListener("click", openPopUp);
+// }
 function openPopUp() {
   document.querySelector(".popUp").classList.remove("hide");
   document.querySelector(".popUp").classList.add("visible");
 
   console.log("pop up");
+}
+
+// expell student
+function expellStudent(student) {
+  console.log(`The student ${student} has been expelled`);
+  const index = allStudents.indexOf(student);
+  console.log(index);
+
+  allStudents.splice(index, 1);
 }

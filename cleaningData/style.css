@@ -24,9 +24,11 @@ td {
   position: absolute;
   top: 20vw;
   left: 20vw;
-  background-color: aqua;
+  background-color: wheat;
   width: 20vw;
   height: 20vw;
+  padding: 3vw 5vw;
+  color: black;
 }
 
 .hide {
