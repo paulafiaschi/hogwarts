@@ -33,8 +33,45 @@ td {
 
 .hide {
   display: none;
+  visibility: hidden;
 }
 
 .visible {
   display: block;
+}
+
+td[data-field="perfect"]::after {
+  content: "🏅";
+}
+
+td[data-field="perfect"][data-perfect="false"]::after {
+  filter: grayscale(1);
+}
+
+.window {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.753);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  box-shadow: 1px 1px 10px grey;
+  border-radius: 0.2rem;
+  padding: 2rem;
+  background-color: wheat;
+  position: relative;
+}
+
+.closebutton {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  border: none;
+  background: none;
 }

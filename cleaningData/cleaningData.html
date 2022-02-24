@@ -46,7 +46,7 @@
 
   <template id="student">
     <tr class="studentRow">
-      <td data-field="perfect" data-perfect="false">⭐</td>
+      <td data-field="perfect" data-perfect="false"></td>
       <td data-field="lastName">LAST NAME</td>
       <td data-field="firstName">FIRST NAME</td>
       <td data-field="middleName">MIDDLE NAME</td>
@@ -54,7 +54,7 @@
       <td data-field="house">HOUSE</td>
       <td data-field="expelled">EXPELLED</td>
       <td data-field="blood">AGE</td>
-      <td class="view-more">Expell</td>
+      <td data-field="view-more">Expell</td>
     </tr>
     <!-- <template id="popUp"> -->
     <div class="popUp hide">
@@ -76,6 +76,19 @@
       </div>
     </div>
   </template>
+
+  <div id="removeOther">
+    <div class="window">
+      <div class="text">
+        <button class="closebutton">X</button>
+        <h2>Warning!</h2>
+        <p>There are alreadyy two <em>Perfect Students</em> from each this House<br>
+          Which one do you want to remove?</p>
+        <button>Remove <span class="perfectA">Perfect A</span> </button>
+        <button>Remove <span class="perfectB">Perfect B</span> </button>
+      </div>
+    </div>
+  </div>
   <!-- </template> -->
 
   <script src="script2.js"></script>

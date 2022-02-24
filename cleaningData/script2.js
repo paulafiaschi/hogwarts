@@ -110,28 +110,18 @@ function displayStudent(student) {
   clone.querySelector(".surname").textContent = student.lastName;
 
   clone.querySelector("button").textContent = "Expell " + student.lastName + "?";
-  clone.querySelector(".view-more").addEventListener("click", expellStudent);
-  console.log(student.firstName + " st index: " + allStudents.indexOf(student));
 
-  clone.querySelector("[data-field=perfect]").dataset.perfect = true;
+  clone.querySelector("[data-field=expelled]").addEventListener("click", expellStudent);
+  clone.querySelector("[data-field=perfect]").addEventListener("click", clickPerfect);
 
-  if (student.perfect === true) {
-    clone.querySelector("[data-field=perfect]").textContent = "🏅";
-  } else {
-    clone.querySelector("[data-field=perfect]").textContent = "";
+  clone.querySelector("[data-field=perfect]").dataset.perfect = student.perfect;
+  function clickPerfect() {
+    if (student.perfect === true) {
+      student.perfect = false;
+    } else {
+      tryToMakePerfect(student);
+    }
   }
-
-  // clone.querySelector("[data-field=star]").addEventListener("click", toggleStar);
-
-  // function toggleStar() {
-  //   if (animal.star === true) {
-  //     animal.star = false;
-  //   } else {
-  //     animal.star = true;
-  //   }
-  // console.log("star clicked " + animal.star);
-  // buildList();
-  // }
 
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
@@ -248,4 +238,39 @@ function expellStudent(student) {
   console.log(index);
 
   allStudents.splice(index, 1);
+}
+
+function tryToMakePerfect(selectedStudent) {
+  const perfects = allStudents.filter((student) => student.perfect);
+  const numPerfects = perfects.length;
+  const other = perfects.filter((student) => student.house === selectedStudent.house.shift());
+
+  if (other !== undefined) {
+    removeOther(other);
+  } else if (numPerfects >= 2) {
+    removeAorB(perfects[0], perfects[1]);
+  } else {
+    makePerefct(selectedStudent);
+  }
+
+  function removeOther(otherPerfect) {
+    removePerfect(other);
+    makePerefct(selectedStudent);
+  }
+
+  function removeAorB(perfectA, perfectB) {
+    removePerfect(perfectA);
+    makePerefct(selectedStudent);
+    // else
+    removePerfect(perfectB);
+    makePerefct(selectedStudent);
+  }
+
+  function removePerfect(studentPerfect) {
+    studentPerfect.perfect = false;
+  }
+
+  function makePerefct(student) {
+    student.perfect = true;
+  }
 }
