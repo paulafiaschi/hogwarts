@@ -79,7 +79,7 @@ function preapareObject(jsonObject) {
 }
 
 function buildList() {
-  const currentList = allStudents; // FUTURE: Filter and sort currentList before displaying
+  const currentList = allStudents;
 
   displayList(currentList);
 }
@@ -154,6 +154,7 @@ function displayStudent(student) {
       document.querySelector(".window").classList.remove("visible");
       document.querySelector("#popUp").classList.add("hide");
       document.querySelector(".window").classList.add("hide");
+      buildList();
     }
   }
   function clickPerfect() {
@@ -167,24 +168,8 @@ function displayStudent(student) {
     buildList();
   }
 
-  // template for the pop up
-  // const clone2 = document.querySelector("#popUp").content.cloneNode(true);
-
-  // let picSource = `${student.lastName.toLowerCase()}_${student.firstName.charAt(0).toLowerCase()}`;
-
-  // clone2.querySelector(".name1").textContent = student.firstName;
-  // clone2.querySelector(".name2").textContent = student.middleName;
-  // clone2.querySelector(".surname").textContent = student.lastName;
-  // clone2.querySelector(".crest").setAttribute("alt", student.house + "House Crest");
-  // clone2.querySelector(".st-picture").setAttribute("src", "/img/students/" + picSource + ".png");
-  // clone2.querySelector(".st-picture").setAttribute("alt", `${student.firstName} ${student.lastName}`);
-  // clone2.querySelector(".crest").setAttribute("src", "/img/" + student.house + "-crest.png");
-  // clone2.querySelector(".crest").setAttribute("alt", student.house + "crest");
-  // clone2.querySelector(".house-colors").style.backgroundImage = "url('/img/" + student.house + "-bg.png')";
-
   // append clones to list
   document.querySelector("#list tbody").appendChild(clone);
-  // document.querySelector("#list tbody").appendChild(clone2);
 }
 
 function selectFilter(event) {
