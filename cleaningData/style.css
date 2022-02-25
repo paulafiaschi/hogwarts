@@ -48,6 +48,7 @@ td[data-field="perfect"][data-perfect="false"]::after {
   filter: grayscale(1);
 }
 
+
 .window {
   position: fixed;
   top: 0;
@@ -81,22 +82,25 @@ td[data-field="perfect"][data-perfect="false"]::after {
   border-radius: 0.2rem;
   width: 30vw;
   height: auto;
-  padding: 5rem 5rem;
+  padding: 3rem 3rem;
   background-color: rgb(245, 238, 179);
+
   position: relative;
   color: black;
 }
 
 .house-colors {
-  padding: 5rem;  
+  padding: 3rem;  
   background-image: url(/img/gryff-bg.png);
   border-radius: 0.2rem;
   box-shadow: 1px 1px 10px grey;
+  margin: 2rem;
 }
 
-.crest{
-width: 7vw;
+.crest, .medal{
+max-height: 7vw;
 }
+
 
 .info-header {
   display: grid;
@@ -110,8 +114,9 @@ width: 7vw;
   min-width: 100%
 }
 .badges{
-  display: flex;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
 }
 
 .huff {
