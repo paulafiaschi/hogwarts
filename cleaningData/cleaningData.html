@@ -56,23 +56,35 @@
       <td data-field="blood">AGE</td>
       <td data-field="view-more">Expell</td>
     </tr>
-    <!-- <template id="popUp"> -->
-    <div class="popU hide">
-      <div><img src="#" alt=""></div>
-      <div class="names"> <span class="name1">Harry </span><span class="alias">wizard</span> <span
-          class="name2">James</span> <span class="surname">Potter</span>
+  </template>
 
-        <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, eius laboriosam dolores ab
-          eligendi ad! Inventore itaque autem dolorum ducimus rerum nam odio veniam aliquam ab, eveniet eum nobis
-          voluptas.
-        </div>
-        <div class="housecrest"><img src="#" alt="" class="crest"></div>
-        <div class="perfect"></div>
-        <div class="expulsion">
-          <button>expell student</button>
-        </div>
-        <div class="inqSquad"></div>
+  <template id="popUp" class="hide">
+    <div class="window">
+      <div class="house-colors">
+        <div class="textDesc">
+          <button class="closebutton">X</button>
+          <div class="info-header">
 
+            <img src="/img/students/potter_h.png" alt="student's picture" class="st-picture">
+
+            <h2 class="names"> <span class="name1">Harry </span><span class="alias"><em>wizard</em></span> <span
+                class="name2">James</span> <span class="surname">Potter</span></h2>
+          </div>
+          <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit unde est dolorem
+            saepe laborum quidem
+            rem
+            culpa quae, ipsa facere in placeat illo deserunt sint eligendi corporis earum reprehenderit reiciendis?
+          </p>
+
+          <div class="badges">
+            <img src="/img/gryff-crest.png" alt="gryffindor crest" class="crest">
+            <p>some badge</p>
+            <p>some badge</p>
+            <p>some badge</p>
+          </div>
+
+          <button id="expellSt">Expell student?</button>
+        </div>
       </div>
     </div>
   </template>
@@ -90,22 +102,6 @@
     </div>
   </div>
 
-  <div id="popUp" class="hid">
-    <div class="window">
-      <div class="house-colors">
-        <div class="textDesc">
-          <button class="closebutton">X</button>
-          <img src="" alt="">
-          <h2 class="names"> <span class="name1">Harry </span><span class="alias"><em>wizard</em></span> <span
-              class="name2">James</span> <span class="surname">Potter</span></h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit unde est dolorem saepe laborum quidem rem
-            culpa quae, ipsa facere in placeat illo deserunt sint eligendi corporis earum reprehenderit reiciendis?</p>
-          <button id="expellSt">Expell student?</button>
-          <button id="isPerfect">Perfect badge</button>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- </template> -->
 
   <script src="script2.js"></script>

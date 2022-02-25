@@ -105,11 +105,11 @@ function displayStudent(student) {
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
   clone.querySelector("[data-field=house]").textContent = student.house;
   clone.querySelector("[data-field=blood]").textContent = student.bloodStatus;
-  clone.querySelector(".name1").textContent = student.firstName;
-  clone.querySelector(".name2").textContent = student.middleName;
-  clone.querySelector(".surname").textContent = student.lastName;
+  // clone.querySelector(".name1").textContent = student.firstName;
+  // clone.querySelector(".name2").textContent = student.middleName;
+  // clone.querySelector(".surname").textContent = student.lastName;
 
-  clone.querySelector("button").textContent = "Expell " + student.lastName + "?";
+  // clone.querySelector("button").textContent = "Expell " + student.lastName + "?";
 
   clone.querySelector("[data-field=expelled]").addEventListener("click", expellStudent);
 
@@ -126,6 +126,9 @@ function displayStudent(student) {
     }
     buildList();
   }
+
+  // template for the pop up
+  clone.querySelector(".studentRow").addEventListener("click", openPopUp());
 
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
@@ -252,11 +255,11 @@ function sortByHouse(stA, stB) {
 // function selectStudent() {
 //   document.querySelector("view-more").addEventListener("click", openPopUp);
 // }
-function openPopUp() {
-  document.querySelector(".popUp").classList.remove("hide");
-  document.querySelector(".popUp").classList.add("visible");
+function openPopUp(student) {
+  document.querySelector("#popUp").classList.remove("hide");
+  document.querySelector("#popUp").classList.add("visible");
 
-  console.log("pop up");
+  console.log("open pop up" + student);
 }
 
 // expell student
