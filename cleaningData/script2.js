@@ -73,6 +73,7 @@ function preapareObject(jsonObject) {
   student.house = house.charAt(0).toUpperCase() + house.substring(1).toLowerCase();
   student.age = jsonObject.age;
   student.perfect = false;
+  student.expelled = false;
 
   allStudents.push(student);
   return student;
@@ -105,37 +106,33 @@ function displayStudent(student) {
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
   clone.querySelector("[data-field=house]").textContent = student.house;
   clone.querySelector("[data-field=blood]").textContent = student.bloodStatus;
-
-  // clone.querySelector("button").textContent = "Expell " + student.lastName + "?";
-
-  clone.querySelector("[data-field=expelled]").addEventListener("click", expellStudent);
+  clone.querySelector("[data-field=expelled]").textContent = student.expelled;
 
   clone.querySelector("[data-field=perfect]").dataset.perfect = student.perfect;
   clone.querySelector("[data-field=perfect]").addEventListener("click", clickPerfect);
   clone.querySelector("[data-field=view-more]").addEventListener("click", clickViewMore);
 
   function clickViewMore() {
-    const clone2 = document.querySelector("#popUp").content.cloneNode(true);
-
-    console.log(`I want to see more from ${student.firstName}`);
-
     document.querySelector("#popUp").classList.remove("hide");
     document.querySelector(".window").classList.remove("hide");
     document.querySelector("#popUp").classList.add("visible");
     document.querySelector(".window").classList.add("visible");
 
+    const clone2 = document.querySelector("#popUp").content.cloneNode(true);
+
+    console.log(`I want to see more from ${student.firstName}`);
+    console.log(allStudents.length);
     let picSource = `${student.lastName.toLowerCase()}_${student.firstName.charAt(0).toLowerCase()}`;
 
     clone2.querySelector(".name1").textContent = student.firstName;
     clone2.querySelector(".name2").textContent = student.middleName;
     clone2.querySelector(".surname").textContent = student.lastName;
+
+    clone2.querySelector(".crest").setAttribute("src", "/img/" + student.house + "-crest.png");
     clone2.querySelector(".crest").setAttribute("alt", student.house + "House Crest");
     clone2.querySelector(".st-picture").setAttribute("src", "/img/students/" + picSource + ".png");
     clone2.querySelector(".st-picture").setAttribute("alt", `${student.firstName} ${student.lastName}`);
-    clone2.querySelector(".crest").setAttribute("src", "/img/" + student.house + "-crest.png");
-    clone2.querySelector(".crest").setAttribute("alt", student.house + "crest");
     clone2.querySelector(".house-colors").style.backgroundImage = "url('/img/" + student.house + "-bg.png')";
-    clone2.querySelector(".closebutton").addEventListener("click", closeWindow);
 
     if (student.perfect === true) {
       clone2.querySelector(".medal").setAttribute("src", "/img/medal.png");
@@ -143,9 +140,11 @@ function displayStudent(student) {
       clone2.querySelector(".medal").setAttribute("src", "");
     }
 
-    document.querySelector("#list tbody").appendChild(clone2);
+    clone2.querySelector("#expellSt").addEventListener("click", expellStudent);
 
-    // fix close window and re do template with new data
+    clone2.querySelector(".closebutton").addEventListener("click", closeWindow);
+
+    document.querySelector("#list tbody").appendChild(clone2);
 
     function closeWindow() {
       console.log("close popup " + student.firstName);
@@ -156,7 +155,25 @@ function displayStudent(student) {
       document.querySelector(".window").classList.add("hide");
       buildList();
     }
+
+    function expellStudent() {
+      console.log(`The student ${student.firstName} has been expelled`);
+      const index = allStudents.indexOf(student);
+      student.expelled = true;
+
+      let expelledStudents = allStudents.splice(index, 1);
+      console.log(allStudents.length);
+      console.log(expelledStudents);
+      buildList;
+      document.querySelector("#expellSt").removeEventListener("click", expellStudent);
+      document.querySelector("#expellSt").addEventListener("click", studentRemoved);
+    }
+
+    function studentRemoved() {
+      window.alert("the student has already been expelled");
+    }
   }
+
   function clickPerfect() {
     console.log("clicked perfect");
     if (student.perfect === true) {
@@ -249,13 +266,7 @@ function sortList(sortBy, sortDir) {
   }
 
   sortedList = sortedList.sort(sortByProperty);
-  // if (sortBy === "fName") {
-  //   sortedList = sortedList.sort(sortByName);
-  // } else if (sortBy === "lName") {
-  //   sortedList = sortedList.sort(sortBySurname);
-  // } else if (sortBy === "house") {
-  //   sortedList = sortedList.sort(sortByHouse);
-  // }
+
   function sortByProperty(stA, stB) {
     console.log("sorted by:" + sortBy);
     if (stA[sortBy] < stB[sortBy]) {
@@ -289,24 +300,9 @@ function sortByHouse(stA, stB) {
   }
 }
 
-function openPopUp(student) {
-  document.querySelector("#popUp").classList.remove("hide");
-  document.querySelector(".window").classList.remove("hide");
-  document.querySelector("#popUp").classList.add("visible");
-  document.querySelector(".window").classList.add("visible");
-  document.querySelector(".closebutton").addEventListener("click", closeWindow);
-
-  function closeWindow() {
-    document.querySelector("#popUp").classList.add("hide");
-    document.querySelector(".window").classList.add("hide");
-    document.querySelector(".closebutton").removeEventListener("click", closeWindow);
-    console.log("open pop up" + student);
-  }
-}
-
 // expell student
-function expellStudent(student) {
-  console.log(`The student ${student} has been expelled`);
+function expellStudent() {
+  console.log(`The student ${student.firstName} has been expelled`);
   const index = allStudents.indexOf(student);
   console.log(index);
 
