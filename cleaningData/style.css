@@ -76,3 +76,37 @@ td[data-field="perfect"][data-perfect="false"]::after {
   border: none;
   background: none;
 }
+
+.textDesc {
+  border-radius: 0.2rem;
+  width: 30vw;
+  height: 45vh;
+  padding: 5rem;
+  background-color: rgb(245, 238, 179);
+  position: relative;
+  color: black;
+}
+
+.house-colors {
+  padding: 5rem;  
+  background-image: url(/img/gryff-bg.png);
+  border-radius: 0.2rem;
+  box-shadow: 1px 1px 10px grey;
+}
+
+.gryff {
+
+
+}
+
+.huff {
+  background-image: url(/img/huff-bg.png);
+}
+
+
+  /* colors: 
+  GRYFF: gold #FCCE0B, red #FF2400 
+  HUFF: grey #33333 and yellow #FCCE0B
+  RAV: blue: #333A94 , bronze: 
+  SLY: green ##009B77, silver #
+}
