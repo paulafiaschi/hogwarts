@@ -185,25 +185,49 @@ function filterExpulsion(studentExpulsion) {
 
 function selectSort(event) {
   const sortBy = event.target.dataset.sort;
-  console.log(`user selected ${sortBy} `);
-  sortList(sortBy);
+  const sortDir = event.target.dataset.sortDirection;
+
+  // toggle direction
+  if (sortDir === "asc") {
+    event.target.dataset.sortDirection = "desc";
+  } else {
+    event.target.dataset.sortDirection = "asc";
+  }
+
+  console.log(`user selected ${sortBy} and ${sortDir}`);
+  sortList(sortBy, sortDir);
 }
 
-function sortList(sortBy) {
+function sortList(sortBy, sortDir) {
   let sortedList = allStudents;
+  let direction = 1;
+  if (sortDir === "desc") {
+    direction = -1;
+  } else {
+    direction = 1;
+  }
 
-  if (sortBy === "fName") {
-    sortedList = sortedList.sort(sortByName);
-  } else if (sortBy === "lName") {
-    sortedList = sortedList.sort(sortBySurname);
-  } else if (sortBy === "house") {
-    sortedList = sortedList.sort(sortByHouse);
+  sortedList = sortedList.sort(sortByProperty);
+  // if (sortBy === "fName") {
+  //   sortedList = sortedList.sort(sortByName);
+  // } else if (sortBy === "lName") {
+  //   sortedList = sortedList.sort(sortBySurname);
+  // } else if (sortBy === "house") {
+  //   sortedList = sortedList.sort(sortByHouse);
+  // }
+  function sortByProperty(stA, stB) {
+    console.log("sorted by:" + sortBy);
+    if (stA[sortBy] < stB[sortBy]) {
+      return -1 * direction;
+    } else {
+      return 1 * direction;
+    }
   }
   displayList(sortedList);
 }
 
 function sortByName(stA, stB) {
-  if (stA.name < stB.name) {
+  if (stA.firstName < stB.firstName) {
     return -1;
   } else {
     return 1;
@@ -248,15 +272,11 @@ function tryToMakePerfect(selectedStudent) {
   const perfects = allStudents.filter((student) => student.perfect);
   const others = perfects.filter((student) => student.house === selectedStudent.house);
 
-  // console.log(`the house is  ${selectedStudent.house}`);
-  // console.log(`there are already ${numPerfects} perfects`);
-  // console.log(`the other winner of this house is ${other.firstName}`);
-
   makePerfect(selectedStudent);
 
   if (others.length >= 2) {
     console.log("there can only be two winners from this house");
-    // removeAorB(others[0], others[1]);
+
     makePerfect(selectedStudent);
     document.querySelector("#removeOther").classList.remove("hide");
     document.querySelector(".closebutton").addEventListener("click", closeWindow);
@@ -273,10 +293,8 @@ function tryToMakePerfect(selectedStudent) {
     document.querySelector("#removeB").removeEventListener("click", clickRemoveB);
   }
   function clickRemoveA(perfectA) {
-    // perfectA.perfect = false;
     removePerfect(others[0]);
 
-    // makePerfect(selectedStudent);
     buildList();
     closeWindow();
   }
