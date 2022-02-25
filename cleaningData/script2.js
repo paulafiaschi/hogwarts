@@ -115,56 +115,45 @@ function displayStudent(student) {
   clone.querySelector("[data-field=view-more]").addEventListener("click", clickViewMore);
 
   function clickViewMore() {
+    const clone2 = document.querySelector("#popUp").content.cloneNode(true);
+
     console.log(`I want to see more from ${student.firstName}`);
-    document.querySelector("[data-field=view-more]").addEventListener("click", clickViewMore);
 
     document.querySelector("#popUp").classList.remove("hide");
     document.querySelector(".window").classList.remove("hide");
     document.querySelector("#popUp").classList.add("visible");
     document.querySelector(".window").classList.add("visible");
-    showPopUp(student);
 
-    function showPopUp(student) {
-      console.log("show pop up from" + student.firstName);
+    let picSource = `${student.lastName.toLowerCase()}_${student.firstName.charAt(0).toLowerCase()}`;
 
-      const clone2 = document.querySelector("#popUp").content.cloneNode(true);
+    clone2.querySelector(".name1").textContent = student.firstName;
+    clone2.querySelector(".name2").textContent = student.middleName;
+    clone2.querySelector(".surname").textContent = student.lastName;
+    clone2.querySelector(".crest").setAttribute("alt", student.house + "House Crest");
+    clone2.querySelector(".st-picture").setAttribute("src", "/img/students/" + picSource + ".png");
+    clone2.querySelector(".st-picture").setAttribute("alt", `${student.firstName} ${student.lastName}`);
+    clone2.querySelector(".crest").setAttribute("src", "/img/" + student.house + "-crest.png");
+    clone2.querySelector(".crest").setAttribute("alt", student.house + "crest");
+    clone2.querySelector(".house-colors").style.backgroundImage = "url('/img/" + student.house + "-bg.png')";
+    clone2.querySelector(".closebutton").addEventListener("click", closeWindow);
 
-      let picSource = `${student.lastName.toLowerCase()}_${student.firstName.charAt(0).toLowerCase()}`;
+    if (student.perfect === true) {
+      clone2.querySelector(".medal").setAttribute("src", "/img/medal.png");
+    } else {
+      clone2.querySelector(".medal").setAttribute("src", "");
+    }
 
-      clone2.querySelector(".name1").textContent = student.firstName;
-      clone2.querySelector(".name2").textContent = student.middleName;
-      clone2.querySelector(".surname").textContent = student.lastName;
-      clone2.querySelector(".crest").setAttribute("alt", student.house + "House Crest");
-      clone2.querySelector(".st-picture").setAttribute("src", "/img/students/" + picSource + ".png");
-      clone2.querySelector(".st-picture").setAttribute("alt", `${student.firstName} ${student.lastName}`);
-      clone2.querySelector(".crest").setAttribute("src", "/img/" + student.house + "-crest.png");
-      clone2.querySelector(".crest").setAttribute("alt", student.house + "crest");
-      clone2.querySelector(".house-colors").style.backgroundImage = "url('/img/" + student.house + "-bg.png')";
-      clone2.querySelector(".closebutton").addEventListener("click", closeWindow);
+    document.querySelector("#list tbody").appendChild(clone2);
 
-      if (student.perfect === true) {
-        clone2.querySelector(".medal").setAttribute("src", "/img/medal.png");
-      } else {
-        clone2.querySelector(".medal").setAttribute("src", "");
-      }
+    // fix close window and re do template with new data
 
-      document.querySelector("#list tbody").appendChild(clone2);
-      function closeWindow() {
-        document.querySelector("#popUp").classList.remove("visible");
-        document.querySelector(".window").classList.remove("visible");
-        document.querySelector("#popUp").classList.add("hide");
-        document.querySelector(".window").classList.add("hide");
-        document.querySelector(".closebutton").removeEventListener("click", closeWindow);
-        resetTemplate();
-        function resetTemplate() {
-          console.log("template cleared");
-          document.querySelector(".name1").textContent = "";
-          document.querySelector(".name2").textContent = "";
-          document.querySelector(".surname").textContent = "";
-
-          document.querySelector("[data-field=view-more]").addEventListener("click", clickViewMore);
-        }
-      }
+    function closeWindow() {
+      console.log("close popup " + student.firstName);
+      document.querySelector("#popUp").classList.remove("visible");
+      document.querySelector("#popUp").classList.remove("visible");
+      document.querySelector(".window").classList.remove("visible");
+      document.querySelector("#popUp").classList.add("hide");
+      document.querySelector(".window").classList.add("hide");
     }
   }
   function clickPerfect() {
