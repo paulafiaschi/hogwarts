@@ -170,7 +170,13 @@ function displayStudent(student) {
     }
 
     function studentRemoved() {
-      window.alert("the student has already been expelled");
+      document.querySelector(".alreadyExpelled").classList.remove("hide");
+      document.querySelector(".cancelbutton").addEventListener("click", closeWarning);
+
+      function closeWarning() {
+        console.log("close warning");
+        document.querySelector(".alreadyExpelled").classList.add("hide");
+      }
     }
   }
 

@@ -70,7 +70,7 @@ td[data-field="perfect"][data-perfect="false"]::after {
   color: black;
 }
 
-.closebutton {
+.closebutton, .cancelbutton {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
@@ -119,9 +119,16 @@ max-height: 7vw;
 
 }
 
-.huff {
-  background-image: url(/img/huff-bg.png);
+.alreadyExpelled{
+  background-color: aqua;
+  color: black;
+  width: 46vw;
+  padding: 3vw;
+  position: absolute;
+  top: 40vh;
+  left: 24vw;
 }
+
 
 
   /* colors: 
