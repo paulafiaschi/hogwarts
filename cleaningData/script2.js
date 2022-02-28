@@ -15,72 +15,8 @@ let nExpelled = 0;
 
 let expellSound = document.querySelector("#expellSound");
 
-const halfBlood = ["Abbott", "Bones", "Jones", "Hopkins", "Finnigan", "Potter", "Brocklehurst", "Goldstein", "Corner", "Bulstrode", "Patil", "Li", "Thomas"];
-const pureBlood = [
-  "Boot",
-  "Cornfoot",
-  "Abbott",
-  "Avery",
-  "Black",
-  "Blishwick",
-  "Brown",
-  "Bulstrode",
-  "Burke",
-  "Carrow",
-  "Crabbe",
-  "Crouch",
-  "Fawley",
-  "Flint",
-  "Gamp",
-  "Gaunt",
-  "Goyle",
-  "Greengrass",
-  "Kama",
-  "Lestrange",
-  "Longbottom",
-  "MacDougal",
-  "Macmillan",
-  "Malfoy",
-  "Max",
-  "Moody",
-  "Nott",
-  "Ollivander",
-  "Parkinson",
-  "Peverell",
-  "Potter",
-  "Prewett",
-  "Prince",
-  "Rosier",
-  "Rowle",
-  "Sayre",
-  "Selwyn",
-  "Shacklebolt",
-  "Shafiq",
-  "Slughorn",
-  "Slytherin",
-  "Travers",
-  "Tremblay",
-  "Tripe",
-  "Urquart",
-  "Weasley",
-  "Yaxley",
-  "Bletchley",
-  "Dumbledore",
-  "Fudge",
-  "Gibbon",
-  "Gryffindor",
-  "Higgs",
-  "Lowe",
-  "Macnair",
-  "Montague",
-  "Mulciber",
-  "Orpington",
-  "Pyrites",
-  "Perks",
-  "Runcorn",
-  "Wilkes",
-  "Zabini",
-];
+let halfBlood = [];
+let pureBlood = [];
 
 const settings = {
   filter: null,
@@ -107,9 +43,9 @@ const Student = {
 
 function start() {
   console.log("ready");
-  console.log(`There are ${allStudents.house === "Slyhterin"}`);
+  // console.log(`There are ${allStudents.house === "Slyhterin"}`);
 
-  loadJSON();
+  loadJSON1();
   registerButtons();
 }
 
@@ -118,23 +54,28 @@ function registerButtons() {
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
 }
 
-async function loadJSON() {
-  // code copied from Animals assignment to fetch data from local json
+async function loadJSON1() {
+  const response2 = await fetch("families.json");
+  const jsonData2 = await response2.json();
+  loadJSON2();
+
+  halfBlood = jsonData2.half;
+  pureBlood = jsonData2.pure;
+  console.log(halfBlood);
+}
+
+async function loadJSON2() {
   const response = await fetch("students.json");
   const jsonData = await response.json();
 
-  const response2 = await fetch("families.json");
-  const jsonData2 = await response2.json();
-
   // when loaded, prepare data objects
   prepareObjects(jsonData);
-  // prepareFamilies(jsonData2);
-  const halfBlood2 = jsonData2.half;
-  const pureBlood2 = jsonData2.pure;
-
-  // console.log("half blood array: " + halfBlood2);
-  // console.log("pure blood array: " + pureBlood2);
 }
+
+// prepareFamilies(jsonData2);
+
+// console.log("half blood array: " + halfBlood2);
+// console.log("pure blood array: " + pureBlood2);
 
 // function prepareFamilies(jsonData2) {
 //   console.log(jsonData2);
@@ -223,7 +164,6 @@ function displayStudent(student) {
     });
   }
   defineBlood(student);
-  // defineAmountStudents(student);
   clone.querySelector("[data-field=blood]").textContent = student.bloodStatus;
 
   // append clones to list
