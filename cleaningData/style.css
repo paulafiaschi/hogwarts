@@ -245,8 +245,8 @@ td[data-field="view-more"] p {
 
 .alreadyExpelled,
 .sureExpelled {
-  background-color: aqua;
-  color: black;
+  background-color: rgb(7, 57, 97);
+  color: white;
   width: 46vw;
   padding: 3vw;
   position: absolute;

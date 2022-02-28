@@ -188,6 +188,11 @@ function displayList(students) {
   // clear the display
   document.querySelector("#list tbody").innerHTML = "";
 
+  // change total numbers in the display
+  document.querySelector(".totalActive").textContent = `Total active students: ${allStudents.length}`;
+  document.querySelector(".totalExpelled").textContent = `Total expelled students: ${expelledStudents.length}`;
+  // console.log(allStudents.groupBy(({ house }) => house);
+
   // build a new list
   students.forEach(displayStudent);
 }
@@ -200,6 +205,9 @@ function displayStudent(student) {
   // console.log(nSly);
 
   // set clone data
+  clone.querySelector("[data-field=view-more]").addEventListener("click", function () {
+    clickViewMore(student);
+  });
   clone.querySelector("[data-field=firstName]").textContent = student.firstName;
   clone.querySelector("[data-field=middleName]").textContent = student.middleName;
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
@@ -214,9 +222,6 @@ function displayStudent(student) {
       clickprefect(student);
     });
   }
-  clone.querySelector("[data-field=view-more]").addEventListener("click", function () {
-    clickViewMore(student);
-  });
   defineBlood(student);
   // defineAmountStudents(student);
   clone.querySelector("[data-field=blood]").textContent = student.bloodStatus;
@@ -259,8 +264,8 @@ function defineBlood(student) {
 function clickViewMore(student) {
   document.querySelector("#popUp").classList.remove("hide");
   document.querySelector(".window").classList.remove("hide");
-  document.querySelector("#popUp").classList.add("visible");
   document.querySelector(".window").classList.add("visible");
+  document.querySelector("#popUp").classList.add("visible");
 
   const clone2 = document.querySelector("#popUp").content.cloneNode(true);
 
