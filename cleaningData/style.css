@@ -4,26 +4,28 @@
 }
 
 body {
-  background-color: white;
+
+  background-color: rgb(238, 237, 237);
   color: black;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   position: relative;
 }
+
 
 #index {
   background-color: grey;
 }
 
 .candles {
-background-image: url(/img/candles-bg@100.png);
-background-repeat: no-repeat;
-background-position-x: left;
-height: 15rem;
-width: 100%;
-position: absolute;
-z-index: -1;
-margin-left: -1rem;
-animation: flying 15s infinite ease-in-out;
+  background-image: url(/img/candles-bg@100.png);
+  background-repeat: no-repeat;
+  background-position-x: left;
+  height: 15rem;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  margin-left: -1rem;
+  animation: flying 15s infinite ease-in-out;
 }
 
 @keyframes flying {
@@ -37,7 +39,6 @@ animation: flying 15s infinite ease-in-out;
   }
 }
 
-
 header {
   display: flex;
   justify-content: left;
@@ -45,9 +46,9 @@ header {
   align-items: center;
   padding: 0 2rem;
   margin-bottom: 2rem;
-  background-color: green;
+  background-color: rgb(105, 4, 4);
 }
-header img{
+header img {
   height: 6vw;
 }
 
@@ -55,18 +56,32 @@ h1 {
   font-family: "harryFont";
   font-size: 3rem;
   text-align: center;
+  color: #fcce0b;
 }
 
-th,
-td {
-  padding: 1rem 1rem;
+thead {
+  background-color: rgb(105, 4, 4);
 }
-tr:nth-child(even){
+
+th{
+  color: white;
+}
+
+td, th {
+  padding: 0.5rem 0.5rem;
+  margin: 0.3rem;
+  border-bottom: 1px solid rgb(197, 194, 194);
+}
+tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
 tr:hover {
   background-color: #ddd;
+}
+
+#sorting:hover {
+  background-color: rgb(105, 4, 4);
 }
 
 main {
@@ -75,27 +90,27 @@ main {
   gap: 2rem;
 }
 .filters {
-display: flex;
-flex-direction: column;
-/* gap: 0.5rem; */
-grid-row: 2/ 4;
-background-color: green;
+  display: flex;
+  flex-direction: column;
+  grid-row: 2/ 4;
+  background-color: rgb(105, 4, 4);
+  color: #fcce0b;
 }
 
-.filters button{
-background:none;
-border: none;
-padding: 0.75rem;
-border-bottom: solid 1px white;
+.filters button {
+  background: none;
+  border: none;
+  padding: 0.75rem;
+  border-bottom: solid 1px white;
+  color: #fcce0b;
 }
 
-.filters button:hover{
+.filters button:hover {
   background-color: greenyellow;
 }
 
 #summary {
   grid-column: 2/-1;
-
 }
 
 .popUp {
@@ -120,14 +135,14 @@ border-bottom: solid 1px white;
 }
 
 td[data-field="prefect"] img {
-width: 3rem;
+  width: 3rem;
 }
 
 td[data-field="prefect"][data-prefect="false"] img {
   filter: grayscale(1);
 }
 
-td[data-field="view-more"] p{
+td[data-field="view-more"] p {
   background-color: green;
   padding: 0.3rem;
   text-align: center;
@@ -149,7 +164,6 @@ td[data-field="view-more"] p{
   align-items: center;
 }
 
-
 .text {
   box-shadow: 1px 1px 10px grey;
   border-radius: 0.2rem;
@@ -159,7 +173,8 @@ td[data-field="view-more"] p{
   color: black;
 }
 
-.closebutton, .cancelbutton {
+.closebutton,
+.cancelbutton {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
@@ -190,15 +205,13 @@ td[data-field="view-more"] p{
 }
 
 .house-colors {
-  padding: 3rem;  
+  padding: 3rem;
   background-image: url(/img/gryff-bg.png);
   background-size: cover;
   border-radius: 0.2rem;
   box-shadow: 1px 1px 10px grey;
   margin: 2rem;
 }
-
-
 
 .info-header {
   display: grid;
@@ -209,20 +222,20 @@ td[data-field="view-more"] p{
 }
 
 .st-picture {
-  min-width: 100%
+  min-width: 100%;
 }
-.badges{
+.badges {
   display: flex;
-grid-column: 1/-1;
-justify-content: space-between;
+  grid-column: 1/-1;
+  justify-content: space-between;
 }
 
-.badges p{
+.badges p {
   margin: 0;
   text-align: center;
 }
 
-.badges img{
+.badges img {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -230,7 +243,8 @@ justify-content: space-between;
   margin-top: 0.5rem;
 }
 
-.alreadyExpelled, .sureExpelled{
+.alreadyExpelled,
+.sureExpelled {
   background-color: aqua;
   color: black;
   width: 46vw;
@@ -252,28 +266,27 @@ a {
   font-size: 2rem;
 
   padding: 1rem;
-  color: #Fcce0b;
+  color: #fcce0b;
   display: block;
-width: fit-content;
+  width: fit-content;
   margin-left: auto;
   margin-right: auto;
   margin-top: 2rem;
 }
-a:hover{
+a:hover {
   text-shadow: 0px 0px 6px white;
-
 }
 
 .appoint {
   text-decoration: underline;
   margin-top: 1rem;
   cursor: pointer;
-
 }
 
-  /* colors: 
+/* colors: 
   GRYFF: gold #FCCE0B, red #FF2400 
   HUFF: grey #33333 and yellow #FCCE0B
   RAV: blue: #333A94 , bronze: 
   SLY: green ##009B77, silver #
 }
+

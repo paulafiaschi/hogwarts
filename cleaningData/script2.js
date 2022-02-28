@@ -157,9 +157,16 @@ function preapareObject(jsonObject) {
   const name = fullname.substring(0, firstSpace);
   const middlename = fullname.substring(firstSpace + 1, lastSpace);
   const lastname = fullname.substring(lastSpace + 1);
+  const nickname = "";
 
   student.firstName = name.charAt(0).toUpperCase() + name.substring(1).toLowerCase();
   student.middleName = middlename.charAt(0).toUpperCase() + middlename.substring(1).toLowerCase();
+  if (student.middleName.includes('"')) {
+    student.nickname = `"${student.middleName.charAt(1).toUpperCase()}${middlename.substring(2).toLowerCase()}`;
+    student.middleName = "";
+  } else {
+    student.nickname = "";
+  }
   student.lastName = lastname.charAt(0).toUpperCase() + lastname.substring(1).toLowerCase();
   student.house = house.charAt(0).toUpperCase() + house.substring(1).toLowerCase();
   student.age = jsonObject.age;
@@ -196,6 +203,7 @@ function displayStudent(student) {
   clone.querySelector("[data-field=firstName]").textContent = student.firstName;
   clone.querySelector("[data-field=middleName]").textContent = student.middleName;
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
+  clone.querySelector("[data-field=nickname]").textContent = student.nickname;
   clone.querySelector("[data-field=house]").textContent = student.house;
   clone.querySelector("[data-field=expelled]").innerHTML = `<p>${student.expelled}</p>`;
 
