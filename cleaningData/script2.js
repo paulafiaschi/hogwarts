@@ -147,7 +147,7 @@ function displayStudent(student) {
   // console.log(nSly);
 
   // set clone data
-  clone.querySelector("[data-field=view-more]").addEventListener("click", function () {
+  clone.querySelector("[data-field=view-more] > p").addEventListener("click", function () {
     clickViewMore(student);
   });
   clone.querySelector("[data-field=firstName]").textContent = student.firstName;
@@ -182,8 +182,6 @@ function defineBlood(student) {
 function clickViewMore(student) {
   document.querySelector("#popUp").classList.remove("hide");
   document.querySelector(".window").classList.remove("hide");
-  document.querySelector(".window").classList.add("visible");
-  document.querySelector("#popUp").classList.add("visible");
 
   const clone2 = document.querySelector("#popUp").content.cloneNode(true);
 
@@ -258,13 +256,9 @@ function clickViewMore(student) {
 
 function closeWindow(student) {
   console.log("close popup " + student.firstName);
-  document.querySelector("#popUp").classList.remove("visible");
-  document.querySelector(".window").classList.remove("visible");
   document.querySelector("#popUp").classList.add("hide");
   document.querySelector(".window").classList.add("hide");
   document.querySelector(".sureExpelled").classList.add("hide");
-
-  buildList();
 }
 
 function sureToExpell(student) {
@@ -274,21 +268,18 @@ function sureToExpell(student) {
   });
   document.querySelector("#no").addEventListener("click", closeWarning);
   document.querySelector(".sureExpelled").classList.remove("hide");
-  document.querySelector(".sureExpelled").classList.add("visible");
 }
 
 function expellStudent(student) {
   console.log(`The student ${student.firstName} has been expelled`);
 
-  const index = allStudents.indexOf(student);
-
   student.expelled = true;
 
+  const index = allStudents.indexOf(student);
   expelledStudents = allStudents.splice(index, 1);
 
   console.log(allStudents.length);
   console.log(`number of students expelled: ${expelledStudents.length}`);
-  buildList();
   console.log(expelledStudents);
 
   document.querySelector(".sureExpelled").classList.add("hide");
@@ -296,6 +287,8 @@ function expellStudent(student) {
     expellStudent(student);
   });
   playExpellSound();
+  buildList();
+
   return expelledStudents;
 }
 
