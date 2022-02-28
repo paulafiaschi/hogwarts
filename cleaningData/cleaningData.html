@@ -17,7 +17,7 @@
   <header>
     <img src="/img/hp-crest.png" alt="logo">
     <h1>Hogwarts Student Database</h1>
-    <input type="text" id="searchBar" oninput="search()" placeholder="Search...">
+    <input type="text" id="searchBar" onkeyup="search()" placeholder="Search...">
   </header>
 
 
@@ -32,17 +32,16 @@
           class="nPrefects"></span></button>
       <button class="filter" data-action="filter" data-filter="Gryffindor">Only Gryffindor <span
           class="nGryff">(33)</span></button>
-      <button class="filter" data-action="filter" data-filter="Slytherin">Only Slytherin<span
+      <button class="filter" data-action="filter" data-filter="Slytherin">Only Slytherin <span
           class="nSly"></span></button>
-      <button class="filter" data-action="filter" data-filter="Ravenclaw">Only Ravenclaw<span
+      <button class="filter" data-action="filter" data-filter="Ravenclaw">Only Ravenclaw <span
           class="nRav"></span></button>
-      <button class="filter" data-action="filter" data-filter="Hufflepuff">Only Hufflepuff<span
+      <button class="filter" data-action="filter" data-filter="Hufflepuff">Only Hufflepuff <span
           class="nHuff"></span></button>
-      <button class="filter" data-action="filter" data-filter="*">all<span class="nAll"></span></button>
-      <button class="filter" data-action="filter" data-filter="expelled">Expelled<span
+      <button class="filter" data-action="filter" data-filter="*">All Active Students <span
+          class="nAll"></span></button>
+      <button class="filter" data-action="filter" data-filter="expelled">Expelled <span
           class="nExpelled"></span></button>
-      <button class="filter" data-action="filter" data-filter="notExpelled">All Active<span
-          class="nNExpelled"></span></button>
     </div>
 
 
@@ -162,6 +161,16 @@
     <div class="alreadyExpelled hide">
       <button class="cancelbutton">X</button>
       <p> This student has already been expelled.</p>
+
+    </div>
+    <div class="inqappointed hide">
+      <button class="cancelbutton">X</button>
+      <p> This student has been appointed to the Inquisitory Squad</p>
+
+    </div>
+    <div class="inqrejected hide">
+      <button class="cancelbutton">X</button>
+      <p> This student has been rejected from the Inquisitory Squad</p>
 
     </div>
 

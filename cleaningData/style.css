@@ -4,13 +4,11 @@
 }
 
 body {
-
   background-color: rgb(238, 237, 237);
   color: black;
   font-family: "Inter", sans-serif;
   position: relative;
 }
-
 
 #index {
   background-color: grey;
@@ -63,11 +61,12 @@ thead {
   background-color: rgb(105, 4, 4);
 }
 
-th{
+th {
   color: white;
 }
 
-td, th {
+td,
+th {
   padding: 0.5rem 0.5rem;
   margin: 0.3rem;
   border-bottom: 1px solid rgb(197, 194, 194);
@@ -244,7 +243,9 @@ td[data-field="view-more"] p {
 }
 
 .alreadyExpelled,
-.sureExpelled {
+.sureExpelled,
+.inqappointed,
+.inqrejected {
   background-color: rgb(7, 57, 97);
   color: white;
   width: 46vw;
@@ -289,4 +290,17 @@ a:hover {
   RAV: blue: #333A94 , bronze: 
   SLY: green ##009B77, silver #
 }
+ */
 
+.fade {
+  animation: fade 0.3s ease-in-out;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
