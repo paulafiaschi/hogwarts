@@ -322,6 +322,12 @@ a:hover {
   z-index: 1;
 }
 
+#blackScreen iframe {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* colors: 
   GRYFF: gold #FCCE0B, red #FF2400 
   HUFF: grey #33333 and yellow #FCCE0B

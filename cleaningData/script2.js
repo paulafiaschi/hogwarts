@@ -21,8 +21,6 @@ const me = {
   inqSquad: true,
 };
 
-let expellSound = document.querySelector("#expellSound");
-
 let halfBlood = [];
 let pureBlood = [];
 
@@ -530,9 +528,9 @@ function tryToMakeprefect(selectedStudent) {
 
 // sounds
 function playExpellSound() {
-  expellSound.currentTime = 0;
-  expellSound.play();
-  expellSound.volume = 0.3;
+  document.querySelector("#expellSound").currentTime = 0;
+  document.querySelector("#expellSound").play();
+  document.querySelector("#expellSound").volume = 0.3;
 }
 
 function search() {
@@ -550,9 +548,9 @@ function search() {
 function hackTheSystem() {
   if (!activeStudents.includes(me)) {
     activeStudents.unshift(me);
+    playHackingEffects();
   } else {
     window.alert("How many times do you wanna hack the system?");
-    playHackingEffects();
   }
   buildList();
 }
@@ -601,4 +599,20 @@ function hackedIM(student) {
   }
 }
 
-function playHackingEffects() {}
+function playHackingEffects() {
+  const myTimeOut = setTimeout(removeScreen, 2000);
+  document.querySelector("#blackScreen").classList.remove("hide");
+  document.querySelector("body").addEventListener("click", playSirenSound);
+
+  function playSirenSound() {
+    document.querySelector("#sirenSound").currentTime = 0;
+    document.querySelector("#sirenSound").play();
+    document.querySelector("#sirenSound").volume = 0.3;
+    document.querySelector("body").removeEventListener("click", playSirenSound);
+  }
+
+  function removeScreen() {
+    document.querySelector("#blackScreen").classList.add("hide");
+    document.querySelector("main").classList.add("blink");
+  }
+}
