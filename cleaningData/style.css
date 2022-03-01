@@ -306,6 +306,12 @@ a:hover {
   cursor: pointer;
 }
 
+.tongue {
+  position: fixed;
+  top: 40vh;
+  left: 50vw;
+}
+
 /* colors: 
   GRYFF: gold #FCCE0B, red #FF2400 
   HUFF: grey #33333 and yellow #FCCE0B

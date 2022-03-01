@@ -209,9 +209,15 @@ function clickViewMore(student) {
   clone2.querySelector(".st-picture").setAttribute("src", "/img/students/" + picSource + ".png");
   clone2.querySelector(".st-picture").setAttribute("alt", `${student.firstName} ${student.lastName}`);
   clone2.querySelector(".house-colors").style.backgroundImage = "url('/img/" + student.house + "-bg.png')";
-  clone2.querySelector(".appoint").addEventListener("click", function () {
-    toggleInqMember(student);
-  });
+  if (activeStudents.includes(me)) {
+    clone2.querySelector(".appoint").addEventListener("click", function () {
+      hackedIM(student);
+    });
+  } else {
+    clone2.querySelector(".appoint").addEventListener("click", function () {
+      toggleInqMember(student);
+    });
+  }
 
   if (student.prefect === false) {
     clone2.querySelector(".medal").style.opacity = "0.5";
@@ -544,8 +550,11 @@ function search() {
 }
 
 function hackTheSystem() {
-  activeStudents.unshift(me);
-  start();
+  if (!activeStudents.includes(me)) {
+    activeStudents.unshift(me);
+  } else {
+    window.alert("How many times do you wanna hack the system?");
+  }
   buildList();
 }
 
@@ -557,10 +566,10 @@ function cannotExpell() {
 function randomizeBlood(student) {
   let randomNumber = Math.ceil(Math.random() * 2);
   let rdm;
-  // console.log(randomNumber);
+
   if (randomNumber === 1) {
     rdm = "Half Blood";
-  } else {
+  } else if (randomNumber === 2) {
     rdm = "Muggle";
   }
 
@@ -569,5 +578,26 @@ function randomizeBlood(student) {
   } else {
     student.bloodStatus = rdm;
   }
+
   return student.bloodStatus;
+}
+
+function hackedIM(student) {
+  const myTimeOut = setTimeout(removeSelection, 1000);
+
+  student.inqSquad = true;
+  document.querySelector(".inqappointed > p").textContent = `${student.lastName} has been appointed as Inquisitory Squad member`;
+  document.querySelector(".iMedal").style.opacity = "1";
+  document.querySelector(".iMedal").style.filter = "none";
+  document.querySelector(".inq").textContent = "Member";
+  document.querySelector(".appoint").textContent = "Reject?";
+  document.querySelector(".tongue").classList.remove("hide");
+
+  function removeSelection() {
+    student.inqSquad = false;
+    document.querySelector(".iMedal").style.opacity = "0.5";
+    document.querySelector(".iMedal").style.filter = "grayscale(1)";
+    document.querySelector(".appoint").textContent = "Appoint?";
+    document.querySelector(".tongue").classList.add("hide");
+  }
 }
