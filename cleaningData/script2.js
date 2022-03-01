@@ -180,6 +180,8 @@ function clickViewMore(student) {
 
   clone2.querySelector(".name1").textContent = student.firstName;
   clone2.querySelector(".name2").textContent = student.middleName;
+  clone2.querySelector(".alias").innerHTML = ` <em>${student.nickname} </em>`;
+  clone2.querySelector(".alias").style.fontSize = "1rem";
   clone2.querySelector(".surname").textContent = student.lastName;
   clone2.querySelector(".crest").setAttribute("src", "/img/" + student.house + "-crest.png");
   clone2.querySelector(".crest").setAttribute("alt", student.house + "House Crest");
@@ -250,6 +252,7 @@ function closeWindow(student) {
   document.querySelector("#popUp").classList.add("hide");
   document.querySelector(".window").classList.add("hide");
   document.querySelector(".sureExpelled").classList.add("hide");
+  buildList();
 }
 
 function sureToExpell(student) {
@@ -271,14 +274,10 @@ function expellStudent(student) {
   });
   document.querySelector("#no").removeEventListener("click", closeWarning);
 
-  console.log(`The student ${student.firstName} has been expelled`);
-  console.log(`expelled student = ${student.lastName}`);
-
-  // expelledStudents.push(student);
-  // console.log(expelledStudents);
+  // console.log(`The student ${student.firstName} has been expelled`);
+  // console.log(`expelled student = ${student.lastName}`);
 
   const index = allStudents.indexOf(student);
-  // console.log(`splice: ${allStudents.splice(index, 1)}`);
   console.log(`index: ${index}`);
   if (index >= 0) {
     let expelledStudent;
@@ -287,7 +286,7 @@ function expellStudent(student) {
   }
 
   student.expelled = true;
-  console.log(allStudents);
+  // console.log(allStudents);
   console.log(`number of students expelled: ${expelledStudents.length}`);
 
   // playExpellSound();
