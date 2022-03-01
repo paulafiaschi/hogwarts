@@ -220,7 +220,6 @@ function clickViewMore(student) {
   if (student.prefect === false) {
     clone2.querySelector(".medal").style.opacity = "0.5";
     clone2.querySelector(".medal").style.filter = "grayscale(1)";
-    clone2.querySelector(".pref").textContent = "Not prefect";
   } else {
     clone2.querySelector(".pref").textContent = "Prefect";
   }
@@ -386,7 +385,7 @@ function filterList(filteredList) {
   } else if (settings.filterBy === "Hufflepuff") {
     filteredList = allStudents.filter(isHufflepuff);
   } else if (settings.filterBy === "*") {
-    filteredList = activeStudents;
+    filteredList = allStudents.filter(isNotExpelled);
   } else if (settings.filterBy === "expelled") {
     filteredList = allStudents.filter(isExpelled);
   } else if (settings.filterBy === "prefect") {
