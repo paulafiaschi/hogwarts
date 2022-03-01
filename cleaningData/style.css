@@ -312,6 +312,16 @@ a:hover {
   left: 50vw;
 }
 
+#blackScreen {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
 /* colors: 
   GRYFF: gold #FCCE0B, red #FF2400 
   HUFF: grey #33333 and yellow #FCCE0B

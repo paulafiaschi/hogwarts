@@ -391,8 +391,6 @@ function filterList(filteredList) {
     filteredList = activeStudents;
   } else if (settings.filterBy === "expelled") {
     filteredList = allStudents.filter(isExpelled);
-  } else if (settings.filterBy === "notExpelled") {
-    filteredList = allStudents.filter(isNotExpelled);
   } else if (settings.filterBy === "prefect") {
     filteredList = allStudents.filter(isPrefect);
   }
@@ -554,6 +552,7 @@ function hackTheSystem() {
     activeStudents.unshift(me);
   } else {
     window.alert("How many times do you wanna hack the system?");
+    playHackingEffects();
   }
   buildList();
 }
@@ -601,3 +600,5 @@ function hackedIM(student) {
     document.querySelector(".tongue").classList.add("hide");
   }
 }
+
+function playHackingEffects() {}
