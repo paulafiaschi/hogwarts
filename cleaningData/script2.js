@@ -382,7 +382,7 @@ function filterList(filteredList) {
   } else if (settings.filterBy === "Hufflepuff") {
     filteredList = allStudents.filter(isHufflepuff);
   } else if (settings.filterBy === "*") {
-    filteredList = allStudents;
+    filteredList = activeStudents;
   } else if (settings.filterBy === "expelled") {
     filteredList = allStudents.filter(isExpelled);
   } else if (settings.filterBy === "notExpelled") {
@@ -545,6 +545,7 @@ function search() {
 
 function hackTheSystem() {
   activeStudents.unshift(me);
+  start();
   buildList();
 }
 
@@ -568,4 +569,5 @@ function randomizeBlood(student) {
   } else {
     student.bloodStatus = rdm;
   }
+  return student.bloodStatus;
 }
