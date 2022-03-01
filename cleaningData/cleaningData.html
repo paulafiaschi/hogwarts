@@ -17,7 +17,6 @@
   <header>
     <img src="/img/hp-crest.png" alt="logo">
     <h1>Hogwarts Student Database</h1>
-    <input type="text" id="searchBar" onkeyup="search()" placeholder="Search...">
   </header>
 
 
@@ -25,9 +24,14 @@
     <div id="summary">
       <p class="totalActive">Total active students:</p>
       <p class="totalExpelled">Total expelled students:</p>
+      <input type="text" id="searchBar" onkeyup="search()" placeholder="Search...">
     </div>
 
     <div class="filters">
+      <button class="filter" data-action="filter" data-filter="*">All Active Students <span
+          class="nAll"></span></button>
+      <button class="filter" data-action="filter" data-filter="expelled">Expelled <span
+          class="nExpelled"></span></button>
       <button class="filter" data-action="filter" data-filter="prefect">Only Prefects <span
           class="nPrefects"></span></button>
       <button class="filter" data-action="filter" data-filter="Gryffindor">Only Gryffindor <span
@@ -38,10 +42,6 @@
           class="nRav"></span></button>
       <button class="filter" data-action="filter" data-filter="Hufflepuff">Only Hufflepuff <span
           class="nHuff"></span></button>
-      <button class="filter" data-action="filter" data-filter="*">All Active Students <span
-          class="nAll"></span></button>
-      <button class="filter" data-action="filter" data-filter="expelled">Expelled <span
-          class="nExpelled"></span></button>
     </div>
 
 
@@ -54,9 +54,9 @@
           <th data-action="sort" data-sort-direction="asc" data-sort="mName">Middle Name</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="aliasNamr">Alias</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="expelled">
+          <!-- <th data-action="sort" data-sort-direction="asc" data-sort="expelled">
             Expelled
-          </th>
+          </th> -->
           <th data-action="sort" data-sort-direction="asc" data-sort="blood">Blood-status</th>
           <th>Description</th>
 
@@ -75,7 +75,6 @@
         <td data-field="middleName">MIDDLE NAME</td>
         <td data-field="nickname">NICKNAME</td>
         <td data-field="house">HOUSE</td>
-        <td data-field="expelled">EXPELLED</td>
         <td data-field="blood">BLOOD-STATUS</td>
         <td data-field="view-more">
           <p>Read more</p>
@@ -84,7 +83,7 @@
     </template>
 
     <template id="popUp" class="hide">
-      <div class="window hide">
+      <div class="window">
         <div class="house-colors">
           <div class="textDesc">
             <button class="closebutton">X</button>

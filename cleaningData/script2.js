@@ -63,15 +63,6 @@ async function loadJSON2() {
   prepareObjects(jsonData);
 }
 
-// prepareFamilies(jsonData2);
-
-// console.log("half blood array: " + halfBlood2);
-// console.log("pure blood array: " + pureBlood2);
-
-// function prepareFamilies(jsonData2) {
-//   console.log(jsonData2);
-// }
-
 function prepareObjects(jsonData) {
   allStudents = jsonData.map(preapareObject);
   buildList();
@@ -100,6 +91,10 @@ function preapareObject(jsonObject) {
     student.nickname = "";
   }
   student.lastName = lastname.charAt(0).toUpperCase() + lastname.substring(1).toLowerCase();
+  if (student.lastName.includes("-")) {
+    const index = student.lastName.indexOf("-");
+    student.lastName = student.lastName.substring(0, index + 1) + student.lastName.charAt(index + 1).toUpperCase() + student.lastName.substring(index + 2);
+  }
   student.house = house.charAt(0).toUpperCase() + house.substring(1).toLowerCase();
   student.age = jsonObject.age;
   student.prefect = false;
@@ -143,9 +138,6 @@ function displayStudent(student) {
   // create clone
   const clone = document.querySelector("#student").content.cloneNode(true);
 
-  // let nSly = allStudents.filter(student.house === "slytherin");
-  // console.log(nSly);
-
   // set clone data
   clone.querySelector("[data-field=view-more] > p").addEventListener("click", function () {
     clickViewMore(student);
@@ -155,8 +147,6 @@ function displayStudent(student) {
   clone.querySelector("[data-field=lastName]").textContent = student.lastName;
   clone.querySelector("[data-field=nickname]").textContent = student.nickname;
   clone.querySelector("[data-field=house]").textContent = student.house;
-  clone.querySelector("[data-field=expelled]").innerHTML = `<p>${student.expelled}</p>`;
-
   clone.querySelector("[data-field=prefect]").dataset.prefect = student.prefect;
 
   if (student.expelled === false) {
@@ -181,7 +171,6 @@ function defineBlood(student) {
 
 function clickViewMore(student) {
   document.querySelector("#popUp").classList.remove("hide");
-  document.querySelector(".window").classList.remove("hide");
 
   const clone2 = document.querySelector("#popUp").content.cloneNode(true);
 
@@ -239,16 +228,18 @@ function clickViewMore(student) {
     clone2.querySelector(".blood").textContent = "Pure blood";
   }
 
-  clone2.querySelector("#expellSt").addEventListener("click", function () {
-    sureToExpell(student);
-  });
-  if (student.expelled === true) {
-    clone2.querySelector("#expellSt").remove();
-    clone2.querySelector(".appoint").remove();
+  if (student.expelled === false) {
+    clone2.querySelector("#expellSt").addEventListener("click", function () {
+      sureToExpell(student);
+    });
+    if (student.expelled === true) {
+      clone2.querySelector("#expellSt").remove();
+      clone2.querySelector(".appoint").remove();
+    }
   }
 
   clone2.querySelector(".closebutton").addEventListener("click", function () {
-    closeWindow(student); //might have to remove parameter
+    closeWindow(student);
   });
 
   document.querySelector("#list tbody").appendChild(clone2);
@@ -263,32 +254,44 @@ function closeWindow(student) {
 
 function sureToExpell(student) {
   console.log(`Sure to expell ${student.firstName}?`);
+  document.querySelector(".sureExpelled").classList.remove("hide");
   document.querySelector("#yes").addEventListener("click", function () {
     expellStudent(student);
   });
   document.querySelector("#no").addEventListener("click", closeWarning);
-  document.querySelector(".sureExpelled").classList.remove("hide");
+  document.querySelector("#expellSt").removeEventListener("click", function () {
+    sureToExpell(student);
+  });
 }
 
 function expellStudent(student) {
-  console.log(`The student ${student.firstName} has been expelled`);
-
-  student.expelled = true;
-
-  const index = allStudents.indexOf(student);
-  expelledStudents = allStudents.splice(index, 1);
-
-  console.log(allStudents.length);
-  console.log(`number of students expelled: ${expelledStudents.length}`);
-  console.log(expelledStudents);
-
   document.querySelector(".sureExpelled").classList.add("hide");
   document.querySelector("#yes").removeEventListener("click", function () {
     expellStudent(student);
   });
-  playExpellSound();
-  buildList();
+  document.querySelector("#no").removeEventListener("click", closeWarning);
 
+  console.log(`The student ${student.firstName} has been expelled`);
+  console.log(`expelled student = ${student.lastName}`);
+
+  // expelledStudents.push(student);
+  // console.log(expelledStudents);
+
+  const index = allStudents.indexOf(student);
+  // console.log(`splice: ${allStudents.splice(index, 1)}`);
+  console.log(`index: ${index}`);
+  if (index >= 0) {
+    let expelledStudent;
+    expelledStudent = allStudents.splice(index, 1);
+    expelledStudents.push(expelledStudent);
+  }
+
+  student.expelled = true;
+  console.log(allStudents);
+  console.log(`number of students expelled: ${expelledStudents.length}`);
+
+  // playExpellSound();
+  buildList();
   return expelledStudents;
 }
 
@@ -300,17 +303,19 @@ function closeWarning() {
 }
 
 function toggleInqMember(student) {
-  console.log("inq clicked" + student.firstName);
   if (student.inqSquad === false) {
-    console.log(`I want to make ${student.firstName} an inq squad`);
     student.inqSquad = true;
-    document.querySelector(".inqappointed").classList.remove("hide");
-    document.querySelector(".cancelbutton").addEventListener("click", closeWarning);
+    document.querySelector(".inqappointed > p").textContent = `${student.lastName} has been appointed as Inquisitory Squad member`;
+    document.querySelector(".iMedal").style.opacity = "1";
+    document.querySelector(".iMedal").style.filter = "none";
+    document.querySelector(".inq").textContent = "Member";
+    document.querySelector(".appoint").textContent = "Reject?";
   } else {
     student.inqSquad = false;
-    console.log(`I want to reject ${student.firstName} from the squad`);
+    document.querySelector(".iMedal").style.opacity = "0.5";
+    document.querySelector(".iMedal").style.filter = "grayscale(1)";
+    document.querySelector(".appoint").textContent = "Appoint?";
   }
-  buildList();
 }
 
 function selectFilter(event) {
@@ -350,7 +355,6 @@ function filterList(filteredList) {
   } else if (settings.filterBy === "prefect") {
     filteredList = allStudents.filter(isPrefect);
   }
-
   return filteredList;
 }
 
@@ -384,8 +388,6 @@ function selectSort(event) {
   } else {
     event.target.dataset.sortDirection = "asc";
   }
-
-  console.log(`user selected ${sortBy} and ${sortDir}`);
   setSort(sortBy, sortDir);
 }
 
@@ -406,7 +408,6 @@ function sortList(sortedList) {
   sortedList = sortedList.sort(sortByProperty);
 
   function sortByProperty(stA, stB) {
-    console.log("sorted by:" + settings.sortBy);
     if (stA[settings.sortBy] < stB[settings.sortBy]) {
       return -1 * direction;
     } else {
@@ -418,7 +419,6 @@ function sortList(sortedList) {
 
 // make prefect
 function clickprefect(student) {
-  console.log("clicked prefect");
   if (student.prefect === true) {
     student.prefect = false;
     const index = allStudents.indexOf(student);
@@ -500,12 +500,12 @@ function search() {
   input = document.querySelector("#searchBar");
   filter = input.value.toUpperCase();
   table = document.querySelector("#list");
-  tr = table.querySelectorAll("tr");
+  tr = table.querySelector("tr");
 
   // Loop through all table rows, and hide those who don't match the search query
 
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].querySelectorAll("td")[0];
+    td = tr[i].querySelector("td")[0];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
