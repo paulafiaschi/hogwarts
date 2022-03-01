@@ -3,8 +3,23 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let allStudents = [];
+let activeStudents = [];
 let expelledStudents = [];
 let allPrefects = [];
+const me = {
+  firstName: "Paula",
+  middleName: "",
+  lastName: "Fiaschi",
+  nickname: "The Hacker",
+  gender: "girl",
+  house: "Gryffindor",
+  desc: "A very wise magician that owns this database now.",
+  bloodStatus: "Muggle",
+  age: 18,
+  expelled: false,
+  prefect: true,
+  inqSquad: true,
+};
 
 let expellSound = document.querySelector("#expellSound");
 
@@ -31,7 +46,6 @@ const Student = {
   expelled: false,
   prefect: false,
   inqSquad: false,
-  star: false,
 };
 
 function start() {
@@ -101,14 +115,17 @@ function preapareObject(jsonObject) {
   student.expelled = false;
 
   allStudents.push(student);
+  activeStudents.push(student);
   return student;
 }
 
 function buildList() {
-  const currentList = allStudents;
+  // const currentList = allStudents;
+  const currentList = activeStudents;
 
   displayList(currentList);
-  return allStudents;
+  // return allStudents;
+  return activeStudents;
 }
 
 function displayList(students) {
@@ -126,7 +143,7 @@ function displayList(students) {
   let nRav = allStudents.filter((student) => student.house === "Ravenclaw");
   document.querySelector(".nRav").textContent = `(${nRav.length})`;
   let nHuff = allStudents.filter((student) => student.house === "Hufflepuff");
-  document.querySelector(".nHuff").textContent = `(${nSly.length})`;
+  document.querySelector(".nHuff").textContent = `(${nHuff.length})`;
   document.querySelector(".nAll").textContent = `(${allStudents.length})`;
   document.querySelector(".nExpelled").textContent = `(${expelledStudents.length})`;
 
@@ -154,7 +171,11 @@ function displayStudent(student) {
       clickprefect(student);
     });
   }
-  defineBlood(student);
+  if (activeStudents.includes(me)) {
+    randomizeBlood(student);
+  } else {
+    defineBlood(student);
+  }
   clone.querySelector("[data-field=blood]").textContent = student.bloodStatus;
 
   // append clones to list
@@ -230,14 +251,20 @@ function clickViewMore(student) {
     clone2.querySelector(".blood").textContent = "Pure blood";
   }
 
-  if (student.expelled === false) {
+  if (student.expelled === false && student.lastName != "Fiaschi") {
     clone2.querySelector("#expellSt").addEventListener("click", function () {
       sureToExpell(student);
     });
-    if (student.expelled === true) {
-      clone2.querySelector("#expellSt").remove();
-      clone2.querySelector(".appoint").remove();
-    }
+  }
+  if (student.expelled === true) {
+    clone2.querySelector("#expellSt").textContent = "Student Expelled";
+    clone2.querySelector("#expellSt").style.backgroundColor = "#636363";
+    clone2.querySelector(".appoint").remove();
+  }
+
+  // hacked list
+  if (student.lastName === "Fiaschi") {
+    clone2.querySelector("#expellSt").addEventListener("click", cannotExpell);
   }
 
   clone2.querySelector(".closebutton").addEventListener("click", function () {
@@ -252,6 +279,7 @@ function closeWindow(student) {
   document.querySelector("#popUp").classList.add("hide");
   document.querySelector(".window").classList.add("hide");
   document.querySelector(".sureExpelled").classList.add("hide");
+
   buildList();
 }
 
@@ -277,12 +305,16 @@ function expellStudent(student) {
   // console.log(`The student ${student.firstName} has been expelled`);
   // console.log(`expelled student = ${student.lastName}`);
 
-  const index = allStudents.indexOf(student);
+  // const index = allStudents.indexOf(student);
+  const index = activeStudents.indexOf(student);
   console.log(`index: ${index}`);
   if (index >= 0) {
     let expelledStudent;
-    expelledStudent = allStudents.splice(index, 1);
+    expelledStudent = activeStudents.splice(index, 1);
+    // expelledStudents = allStudents.splice(index, 1);
     expelledStudents.push(expelledStudent);
+    console.log(expelledStudents);
+    student.expelled = true;
   }
 
   student.expelled = true;
@@ -299,6 +331,7 @@ function closeWarning() {
   document.querySelector(".sureExpelled").classList.add("hide");
   document.querySelector(".inqappointed").classList.add("hide");
   document.querySelector(".inqrejected").classList.add("hide");
+  document.querySelector(".cannotExpell").classList.add("hide");
 }
 
 function toggleInqMember(student) {
@@ -320,7 +353,6 @@ function toggleInqMember(student) {
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
   console.log(`user selected ${filter} `);
-  // filterList(filter);
   setFilter(filter);
 }
 
@@ -330,7 +362,11 @@ function setFilter(filter) {
 }
 
 function createList() {
-  const currentList = filterList(allStudents);
+  let currentList = filterList(allStudents);
+  if (activeStudents.includes(me)) {
+    currentList = filterList(activeStudents);
+  }
+
   const sortedList = sortList(currentList);
   displayList(sortedList);
 }
@@ -348,7 +384,7 @@ function filterList(filteredList) {
   } else if (settings.filterBy === "*") {
     filteredList = allStudents;
   } else if (settings.filterBy === "expelled") {
-    filteredList = expelledStudents;
+    filteredList = allStudents.filter(isExpelled);
   } else if (settings.filterBy === "notExpelled") {
     filteredList = allStudents.filter(isNotExpelled);
   } else if (settings.filterBy === "prefect") {
@@ -372,6 +408,9 @@ function isHufflepuff(student) {
 
 function isNotExpelled(student) {
   return student.expelled === false;
+}
+function isExpelled(student) {
+  return student.expelled === true;
 }
 function isPrefect(student) {
   return student.prefect === true;
@@ -493,25 +532,40 @@ function playExpellSound() {
 }
 
 function search() {
-  // Declare variables
+  const input = document.querySelector("#searchBar");
 
-  let input, filter, table, tr, td, i, txtValue;
-  input = document.querySelector("#searchBar");
-  filter = input.value.toUpperCase();
-  table = document.querySelector("#list");
-  tr = table.querySelector("tr");
+  const searchStr = input.value.toUpperCase();
 
-  // Loop through all table rows, and hide those who don't match the search query
+  const searchedStudents = activeStudents.filter((student) => {
+    return student.firstName.toUpperCase().includes(searchStr) || student.lastName.toUpperCase().includes(searchStr);
+  });
 
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].querySelector("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
+  displayList(searchedStudents);
+}
+
+function hackTheSystem() {
+  activeStudents.unshift(me);
+  buildList();
+}
+
+function cannotExpell() {
+  document.querySelector(".cannotExpell").classList.remove("hide");
+  document.querySelector(".cancelhbutton").addEventListener("click", closeWarning);
+}
+
+function randomizeBlood(student) {
+  let randomNumber = Math.ceil(Math.random() * 2);
+  let rdm;
+  // console.log(randomNumber);
+  if (randomNumber === 1) {
+    rdm = "Half Blood";
+  } else {
+    rdm = "Muggle";
+  }
+
+  if (student.bloodStatus === "Muggle" || student.bloodStatus === "Half Blood") {
+    student.bloodStatus = "Pure Blood";
+  } else {
+    student.bloodStatus = rdm;
   }
 }
