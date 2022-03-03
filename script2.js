@@ -59,7 +59,7 @@ function registerButtons() {
 }
 
 async function loadJSON1() {
-  const response2 = await fetch("families.json");
+  const response2 = await fetch("/json/families.json");
   const jsonData2 = await response2.json();
   loadJSON2();
 
@@ -68,7 +68,7 @@ async function loadJSON1() {
 }
 
 async function loadJSON2() {
-  const response = await fetch("students.json");
+  const response = await fetch("/json/students.json");
   const jsonData = await response.json();
 
   // when loaded, prepare data objects
@@ -202,11 +202,11 @@ function clickViewMore(student) {
   clone2.querySelector(".alias").innerHTML = ` <em>${student.nickname} </em>`;
   clone2.querySelector(".alias").style.fontSize = "1rem";
   clone2.querySelector(".surname").textContent = student.lastName;
-  clone2.querySelector(".crest").setAttribute("src", "/img/" + student.house + "-crest.png");
+  clone2.querySelector(".crest").setAttribute("src", "img/" + student.house + "-crest.png");
   clone2.querySelector(".crest").setAttribute("alt", student.house + "House Crest");
-  clone2.querySelector(".st-picture").setAttribute("src", "/img/students/" + picSource + ".png");
+  clone2.querySelector(".st-picture").setAttribute("src", "img/students/" + picSource + ".png");
   clone2.querySelector(".st-picture").setAttribute("alt", `${student.firstName} ${student.lastName}`);
-  clone2.querySelector(".house-colors").style.backgroundImage = "url('/img/" + student.house + "-bg.png')";
+  clone2.querySelector(".house-colors").style.backgroundImage = "url('img/" + student.house + "-bg.png')";
   if (activeStudents.includes(me)) {
     clone2.querySelector(".appoint").addEventListener("click", function () {
       hackedIM(student);
@@ -247,10 +247,10 @@ function clickViewMore(student) {
   }
 
   if (student.bloodStatus === "Half Blood") {
-    clone2.querySelector(".blood-type").setAttribute("src", "/img/half-blood.png");
+    clone2.querySelector(".blood-type").setAttribute("src", "img/half-blood.png");
     clone2.querySelector(".blood").textContent = "Half blood";
   } else if (student.bloodStatus === "Pure Blood") {
-    clone2.querySelector(".blood-type").setAttribute("src", "/img/pure-blood.png");
+    clone2.querySelector(".blood-type").setAttribute("src", "img/pure-blood.png");
     clone2.querySelector(".blood").textContent = "Pure blood";
   }
 
@@ -305,16 +305,12 @@ function expellStudent(student) {
   });
   document.querySelector("#no").removeEventListener("click", closeWarning);
 
-  // console.log(`The student ${student.firstName} has been expelled`);
-  // console.log(`expelled student = ${student.lastName}`);
-
-  // const index = allStudents.indexOf(student);
   const index = activeStudents.indexOf(student);
   console.log(`index: ${index}`);
   if (index >= 0) {
     let expelledStudent;
     expelledStudent = activeStudents.splice(index, 1);
-    // expelledStudents = allStudents.splice(index, 1);
+
     expelledStudents.push(expelledStudent);
     console.log(expelledStudents);
     student.expelled = true;
