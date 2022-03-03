@@ -207,43 +207,42 @@ function clickViewMore(student) {
   clone2.querySelector(".st-picture").setAttribute("src", "img/students/" + picSource + ".png");
   clone2.querySelector(".st-picture").setAttribute("alt", `${student.firstName} ${student.lastName}`);
   clone2.querySelector(".house-colors").style.backgroundImage = "url('img/" + student.house + "-bg.png')";
+
   if (activeStudents.includes(me)) {
     clone2.querySelector(".appoint").addEventListener("click", function () {
       hackedIM(student);
     });
-  } else {
-    clone2.querySelector(".appoint").addEventListener("click", function () {
-      toggleInqMember(student);
-    });
+  } else if (student.inqSquad === false) {
+    clone2.querySelector(".iMedal").style.opacity = "0.5";
+    clone2.querySelector(".iMedal").style.filter = "grayscale(1)";
+    clone2.querySelector(".appoint").textContent = "Appoint?";
+
+    if (student.house != "Slytherin" && student.bloodStatus != "Pure Blood") {
+      clone2.querySelector(".appoint").removeEventListener("click", toggleInqMember);
+      clone2.querySelector(".inq").textContent = "Not member";
+      clone2.querySelector(".appoint").textContent = "Cannot be appointed";
+      clone2.querySelector(".appoint").style.textDecoration = "none";
+      clone2.querySelector(".appoint").style.color = "gray";
+      clone2.querySelector(".appoint").style.cursor = "not-allowed";
+    } else if (student.house === "Slytherin" || student.bloodStatus === "Pure Blood") {
+      clone2.querySelector(".inq").textContent = "Member";
+      clone2.querySelector(".appoint").textContent = "Appoint?";
+      clone2.querySelector(".appoint").addEventListener("click", function () {
+        toggleInqMember(student);
+      });
+    }
   }
+  // } else if{
+  //   clone2.querySelector(".appoint").addEventListener("click", function () {
+  //     toggleInqMember(student);
+  //   });
+  // }
 
   if (student.prefect === false) {
     clone2.querySelector(".medal").style.opacity = "0.5";
     clone2.querySelector(".medal").style.filter = "grayscale(1)";
   } else {
     clone2.querySelector(".pref").textContent = "Prefect";
-  }
-
-  if (student.inqSquad === false) {
-    clone2.querySelector(".iMedal").style.opacity = "0.5";
-    clone2.querySelector(".iMedal").style.filter = "grayscale(1)";
-
-    if (student.house != "Slytherin" && student.bloodStatus != "Pure Blood") {
-      clone2.querySelector(".inq").textContent = "Not member";
-      clone2.querySelector(".appoint").textContent = "Cannot be appointed";
-      clone2.querySelector(".appoint").style.textDecoration = "none";
-      clone2.querySelector(".appoint").style.color = "gray";
-      clone2.querySelector(".appoint").style.cursor = "not-allowed";
-      clone2.querySelector(".appoint").removeEventListener("click", function () {
-        toggleInqMember(student);
-      });
-    }
-  } else {
-    clone2.querySelector(".inq").textContent = "Member";
-    clone2.querySelector(".appoint").textContent = "Reject?";
-    clone2.querySelector(".appoint").addEventListener("click", function () {
-      toggleInqMember(student);
-    });
   }
 
   if (student.bloodStatus === "Half Blood") {
@@ -544,10 +543,10 @@ function hackTheSystem() {
   if (!activeStudents.includes(me)) {
     activeStudents.unshift(me);
     playHackingEffects();
+    buildList();
   } else {
     window.alert("How many times do you wanna hack the system?");
   }
-  buildList();
 }
 
 function cannotExpell() {
