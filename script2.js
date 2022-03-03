@@ -51,6 +51,7 @@ function start() {
 
   loadJSON1();
   registerButtons();
+  document.querySelector(".hackbutton").addEventListener("click", hackTheSystem);
 }
 
 function registerButtons() {

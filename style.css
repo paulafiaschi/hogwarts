@@ -396,3 +396,14 @@ input {
   border: solid 2px rgb(105, 4, 4);
   height: 1rem;
 }
+
+.hackbutton {
+  background-color: red;
+  color: white;
+  width: fit-content;
+  padding: 1rem;
+  display: block;
+  margin-left: auto;
+  cursor: help;
+  justify-self: flex-end;
+}
