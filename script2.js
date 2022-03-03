@@ -59,7 +59,7 @@ function registerButtons() {
 }
 
 async function loadJSON1() {
-  const response2 = await fetch("/json/families.json");
+  const response2 = await fetch("json/families.json");
   const jsonData2 = await response2.json();
   loadJSON2();
 
@@ -68,7 +68,7 @@ async function loadJSON1() {
 }
 
 async function loadJSON2() {
-  const response = await fetch("/json/students.json");
+  const response = await fetch("json/students.json");
   const jsonData = await response.json();
 
   // when loaded, prepare data objects
