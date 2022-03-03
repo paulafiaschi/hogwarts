@@ -320,7 +320,7 @@ function expellStudent(student) {
 
   console.log(`number of students expelled: ${expelledStudents.length}`);
 
-  // playExpellSound();
+  playExpellSound();
   buildList();
   return expelledStudents;
 }
