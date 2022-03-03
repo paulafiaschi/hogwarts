@@ -14,7 +14,7 @@ const me = {
   gender: "girl",
   house: "Gryffindor",
   desc: "A very wise magician that owns this database now.",
-  bloodStatus: "Muggle",
+  bloodStatus: "Pure Blood",
   age: 18,
   expelled: false,
   prefect: true,
@@ -563,13 +563,15 @@ function randomizeBlood(student) {
   let randomNumber = Math.ceil(Math.random() * 2);
   let rdm;
 
+  console.log("blood randomized");
+
   if (randomNumber === 1) {
     rdm = "Half Blood";
   } else if (randomNumber === 2) {
     rdm = "Muggle";
   }
 
-  if (student.bloodStatus === "Muggle" || student.bloodStatus === "Half Blood") {
+  if ((me.bloodStatus === "Pure Blood" && student.bloodStatus === "Muggle") || (me.bloodStatus === "Pure Blood" && student.bloodStatus === "Half Blood")) {
     student.bloodStatus = "Pure Blood";
   } else {
     student.bloodStatus = rdm;
