@@ -317,7 +317,7 @@ function expellStudent(student) {
   }
 
   student.expelled = true;
-  // console.log(allStudents);
+
   console.log(`number of students expelled: ${expelledStudents.length}`);
 
   // playExpellSound();
