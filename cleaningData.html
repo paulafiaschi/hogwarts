@@ -5,15 +5,215 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tryouts</title>
+  <title>Cleaning Data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <h1>Hogwarts Student Database</h1>
+  <header>
+    <img src="/img/hp-crest.png" alt="logo">
+    <h1>Hogwarts Student Database</h1>
+  </header>
 
 
-  <script src="/tryouts/script3.js"></script>
+  <main>
+    <div id="summary">
+      <p class="totalActive">Total active students:</p>
+      <p class="totalExpelled">Total expelled students:</p>
+      <input type="text" id="searchBar" onkeyup="search()" placeholder="Search...">
+    </div>
+
+    <div class="filters">
+      <button class="filter" data-action="filter" data-filter="*">All Active Students <span
+          class="nAll"></span></button>
+      <button class="filter" data-action="filter" data-filter="expelled">Expelled <span
+          class="nExpelled"></span></button>
+      <button class="filter" data-action="filter" data-filter="prefect">Only Prefects <span
+          class="nPrefects"></span></button>
+
+      <button class="filter" data-action="filter" data-filter="Gryffindor">Only Gryffindor <span
+          class="nGryff">(33)</span></button>
+      <button class="filter" data-action="filter" data-filter="Slytherin">Only Slytherin <span
+          class="nSly"></span></button>
+      <button class="filter" data-action="filter" data-filter="Ravenclaw">Only Ravenclaw <span
+          class="nRav"></span></button>
+      <button class="filter" data-action="filter" data-filter="Hufflepuff">Only Hufflepuff <span
+          class="nHuff"></span></button>
+    </div>
+
+
+    <table id="list">
+      <thead>
+        <tr id="sorting">
+          <th data-action="sort" data-sort-direction="asc" data-sort="prefect">prefect</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="lastName">Last Name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="firstName">First Name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="mName">Middle Name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="aliasNamr">Alias</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
+          <!-- <th data-action="sort" data-sort-direction="asc" data-sort="expelled">
+            Expelled
+          </th> -->
+          <th data-action="sort" data-sort-direction="asc" data-sort="blood">Blood-status</th>
+          <th>Description</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <!-- animal template will be copied and inserted here -->
+      </tbody>
+    </table>
+
+    <template id="student">
+      <tr class="studentRow">
+        <td data-field="prefect" data-prefect="false"><img src="/img/prefect.png" alt=""></td>
+        <td data-field="lastName">LAST NAME</td>
+        <td data-field="firstName">FIRST NAME</td>
+        <td data-field="middleName">MIDDLE NAME</td>
+        <td data-field="nickname">NICKNAME</td>
+        <td data-field="house">HOUSE</td>
+        <td data-field="blood">BLOOD-STATUS</td>
+        <td data-field="view-more">
+          <p>Read more</p>
+        </td>
+      </tr>
+    </template>
+
+    <template id="popUp" class="hide">
+      <div class="window">
+        <div class="house-colors">
+          <div class="textDesc">
+            <button class="closebutton">X</button>
+            <div class="info-header">
+
+              <img src="/img/students/potter_h.png" alt="student's picture" class="st-picture">
+
+              <h2 class="names"> <span class="name1">Harry </span><span class="alias"></span> <span
+                  class="name2">James</span> <span class="surname">Potter</span></h2>
+              <button id="expellSt">Expell student</button>
+            </div>
+            <div>
+              <h3 class="description"> Description</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit unde est dolorem
+                saepe laborum quidem
+                rem
+                culpa quae, ipsa facere in placeat illo deserunt sint eligendi corporis earum reprehenderit reiciendis?
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis aliquid, fugiat omnis illo dolore
+                doloribus dolores nostrum nobis explicabo nesciunt praesentium alias labore eos aspernatur magnam sed
+                delectus molestiae beatae!
+              </p>
+            </div>
+
+            <div class="badges">
+              <div>
+                <p>House: </p>
+                <img src="/img/gryff-crest.png" alt="gryffindor crest" class="crest">
+                <p class="house">Gryffindor</p>
+              </div>
+              <div>
+                <p>Purity of blood: </p>
+                <img src="/img/muggle.png" alt="gryffindor crest" class="blood-type">
+                <p class="blood">Muggle</p>
+              </div>
+              <div>
+                <p>Inquisitory Squad: </p>
+                <img src="/img/inqSquad.png" alt="Inquisitory Squad medal" class="iMedal">
+                <p class="inq">Not member</p>
+                <p class="appoint">Appoint?</p>
+                <iframe src="https://giphy.com/embed/hRBOJyRCLkrLsT451I" width="150" height="150" frameBorder="0"
+                  class="giphy-embed hide tongue" allowFullScreen></iframe>
+                <p class="hide"><a
+                    href="https://giphy.com/gifs/zarzillagames-tongue-zarzilla-games-hRBOJyRCLkrLsT451I">via GIPHY</a>
+                </p>
+
+              </div>
+              <div>
+                <p>prefect Student</p>
+                <img src="/img/prefect.png" alt="Prefect badge" class="medal">
+                <p class="pref">Not prefect</p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <div id="removeOther" class="hide">
+      <div class="window">
+        <div class="text">
+          <button class="closebutton">X</button>
+          <h2>Warning!</h2>
+          <p>There are already two <em>prefect Students</em> from this House<br>
+            Which one do you want to remove to continue?</p>
+          <button id="removeA">Remove <span class="prefectA">prefect A</span> </button>
+          <button id="removeB">Remove <span class="prefectB">prefect B</span> </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sureExpelled hide">
+      <button class="cancelbutton">X</button>
+      <p> Are you sure you want to expell this student?</p>
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
+
+    <div class="alreadyExpelled hide">
+      <button class="cancelbutton">X</button>
+      <p> This student has already been expelled.</p>
+    </div>
+    <div class="cannotExpell hide blink">
+      <button class="cancelhbutton">X</button>
+      <p> You can't expell me</p>
+      <iframe src="https://giphy.com/embed/hQidaBLsDmFXVSF9OU" width="150" height="150" frameBorder="0"
+        class="giphy-embed" allowFullScreen></iframe>
+      <p><a href="https://giphy.com/gifs/computer-mouse-working-hQidaBLsDmFXVSF9OU">via GIPHY</a></p>
+    </div>
+
+    <div class="inqappointed hide">
+      <button class="cancelbutton">X</button>
+      <p> This student has been appointed to the Inquisitory Squad</p>
+    </div>
+
+    <div class="inqrejected hide">
+      <button class="cancelbutton">X</button>
+      <p> This student has been rejected from the Inquisitory Squad</p>
+    </div>
+
+    <div id="blackScreen" class="hide blink">
+      <iframe src="https://giphy.com/embed/V4NSR1NG2p0KeJJyr5" width="500" height="500" frameBorder="0"
+        class="giphy-embed" allowFullScreen></iframe>
+      <p><a href="https://giphy.com/gifs/hacker-hacking-binary-V4NSR1NG2p0KeJJyr5">via GIPHY</a></p>
+    </div>
+
+    <div id="sounds">
+      <audio id="expellSound" src="/sounds/expell.mp3"></audio>
+      <audio id="sirenSound" src="/sounds/siren.mp3"></audio>
+    </div>
+
+  </main>
+
+  <footer>
+    <ul>Copyright:
+      <li><a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Pixel perfect -
+          Flaticon</a></li>
+      <li><a
+          href="https://www.fruugo.dk/gryffindor-crest-fra-harry-potter-vaeg-monteret-officielle-pap-paklaedningsdukke/p-19237959-42276794?language=da&ac=croud&gclid=CjwKCAiApfeQBhAUEiwA7K_UH16OVxwlTcrpdNSs0I44bwP3Ydiw_EXfYk4whGI4R_jKh6LJsviAVRoC-kkQAvD_BwE&gclsrc=aw.ds"
+          title="house crests">House crests taken from Fruugo.dk</a></li>
+      <li><a href="https://www.zapsplat.com/" title="Sound effects">All sounds used are from Zapsplat.com</a></li>
+      <li><a href="https://www.pexels.com/search/funny%20monkey/" title="Monkey picture">
+          Monkey Photo by prasanthdas ds from Pexels</a></li>
+      <li></li>
+    </ul>
+  </footer>
+
+  <script src="script2.js"></script>
 </body>
 
 </html>
