@@ -193,8 +193,8 @@ function clickViewMore(student) {
 
   const clone2 = document.querySelector("#popUp").content.cloneNode(true);
 
-  console.log(`I want to see more from ${student.firstName}`);
-  console.log(allStudents.length);
+  // console.log(`I want to see more from ${student.firstName}`);
+  // console.log(allStudents.length);
   let picSource = `${student.lastName.toLowerCase()}_${student.firstName.charAt(0).toLowerCase()}`;
 
   clone2.querySelector(".name1").textContent = student.firstName;
@@ -278,7 +278,7 @@ function clickViewMore(student) {
 }
 
 function closeWindow(student) {
-  console.log("close popup " + student.firstName);
+  // console.log("close popup " + student.firstName);
   document.querySelector("#popUp").classList.add("hide");
   document.querySelector(".window").classList.add("hide");
   document.querySelector(".sureExpelled").classList.add("hide");
@@ -287,7 +287,7 @@ function closeWindow(student) {
 }
 
 function sureToExpell(student) {
-  console.log(`Sure to expell ${student.firstName}?`);
+  // console.log(`Sure to expell ${student.firstName}?`);
   document.querySelector(".sureExpelled").classList.remove("hide");
   document.querySelector("#yes").addEventListener("click", function () {
     expellStudent(student);
@@ -306,19 +306,19 @@ function expellStudent(student) {
   document.querySelector("#no").removeEventListener("click", closeWarning);
 
   const index = activeStudents.indexOf(student);
-  console.log(`index: ${index}`);
+  // console.log(`index: ${index}`);
   if (index >= 0) {
     let expelledStudent;
     expelledStudent = activeStudents.splice(index, 1);
 
     expelledStudents.push(expelledStudent);
-    console.log(expelledStudents);
+    // console.log(expelledStudents);
     student.expelled = true;
   }
 
   student.expelled = true;
 
-  console.log(`number of students expelled: ${expelledStudents.length}`);
+  // console.log(`number of students expelled: ${expelledStudents.length}`);
 
   playExpellSound();
   buildList();
@@ -326,7 +326,7 @@ function expellStudent(student) {
 }
 
 function closeWarning() {
-  console.log("close warning");
+  // console.log("close warning");
   document.querySelector(".sureExpelled").classList.add("hide");
   document.querySelector(".inqappointed").classList.add("hide");
   document.querySelector(".inqrejected").classList.add("hide");
@@ -351,7 +351,7 @@ function toggleInqMember(student) {
 
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
-  console.log(`user selected ${filter} `);
+  // console.log(`user selected ${filter} `);
   setFilter(filter);
 }
 
@@ -458,7 +458,7 @@ function clickprefect(student) {
     student.prefect = false;
     const index = allStudents.indexOf(student);
     allPrefects.splice(index, 1);
-    console.log(allPrefects);
+    // console.log(allPrefects);
   } else {
     tryToMakeprefect(student);
   }
@@ -470,7 +470,7 @@ function tryToMakeprefect(selectedStudent) {
   const others = prefects.filter((student) => student.house === selectedStudent.house);
 
   if (others.length >= 2) {
-    console.log("there can only be two winners from this house");
+    // console.log("there can only be two winners from this house");
 
     document.querySelector("#removeOther").classList.remove("hide");
     document.querySelector(".closebutton").addEventListener("click", closeWindow);
@@ -510,14 +510,14 @@ function tryToMakeprefect(selectedStudent) {
     const index = allPrefects.indexOf(studentprefect);
     allPrefects.splice(index, 1);
     studentprefect.prefect = false;
-    console.log(`removed ${studentprefect.firstName} from ${studentprefect.house}'s prefect list`);
+    // console.log(`removed ${studentprefect.firstName} from ${studentprefect.house}'s prefect list`);
     buildList();
   }
 
   function makeprefect(student) {
     student.prefect = true;
     allPrefects.push(student);
-    console.log(allPrefects);
+    // console.log(allPrefects);
   }
 }
 
@@ -559,7 +559,7 @@ function randomizeBlood(student) {
   let randomNumber = Math.ceil(Math.random() * 2);
   let rdm;
 
-  console.log("blood randomized");
+  // console.log("blood randomized");
 
   if (randomNumber === 1) {
     rdm = "Half Blood";
