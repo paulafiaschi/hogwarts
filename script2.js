@@ -132,7 +132,7 @@ function displayList(students) {
   document.querySelector("#list tbody").innerHTML = "";
 
   // change total numbers in the display
-  document.querySelector(".totalActive").textContent = `Total active students: ${allStudents.length}`;
+  document.querySelector(".totalActive").textContent = `Total active students: ${activeStudents.length}`;
   document.querySelector(".totalExpelled").textContent = `Total expelled students: ${expelledStudents.length}`;
   document.querySelector(".nPrefects").textContent = `(${allPrefects.length})`;
   let nGryff = allStudents.filter((student) => student.house === "Gryffindor");
@@ -145,7 +145,7 @@ function displayList(students) {
   document.querySelector(".nHuff").textContent = `(${nHuff.length})`;
   document.querySelector(".nAll").textContent = `(${allStudents.length})`;
   document.querySelector(".nExpelled").textContent = `(${expelledStudents.length})`;
-
+  document.querySelector(".displaySt").textContent = `Currently displaying: ${students.length}`;
   // build a new list
   students.forEach(displayStudent);
 }
