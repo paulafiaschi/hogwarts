@@ -407,3 +407,18 @@ input {
   cursor: help;
   justify-self: flex-end;
 }
+
+.remove {
+  animation: remove 0.8s linear;
+}
+
+@keyframes remove {
+  5% {
+    transform: rotate(-20deg);
+  }
+
+  100% {
+    transform: scale(0.05);
+    /* transform: rotate(-40deg); */
+  }
+}

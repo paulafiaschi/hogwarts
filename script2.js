@@ -300,6 +300,8 @@ function sureToExpell(student) {
 
 function expellStudent(student) {
   document.querySelector(".sureExpelled").classList.add("hide");
+  document.querySelector(".house-colors").classList.add("remove");
+  document.querySelector(".house-colors").addEventListener("animationend", endAnim);
   document.querySelector("#yes").removeEventListener("click", function () {
     expellStudent(student);
   });
@@ -319,9 +321,11 @@ function expellStudent(student) {
   student.expelled = true;
 
   // console.log(`number of students expelled: ${expelledStudents.length}`);
-
+  function endAnim() {
+    buildList();
+  }
   playExpellSound();
-  buildList();
+  // buildList();
   return expelledStudents;
 }
 
