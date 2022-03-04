@@ -1,5 +1,11 @@
 "use strict";
 
+const urlParams = new URLSearchParams(window.location.search);
+const page = parseInt(urlParams.get("page"));
+const url = "cleaningData.html?page=" + page;
+let prevPage = page - 1;
+let postPage = page + 1;
+
 window.addEventListener("DOMContentLoaded", start);
 
 let allStudents = [];
@@ -48,7 +54,7 @@ const Student = {
 
 function start() {
   console.log("ready");
-
+  pagination();
   loadJSON1();
   registerButtons();
   document.querySelector(".hackbutton").addEventListener("click", hackTheSystem);
@@ -135,7 +141,7 @@ function displayList(students) {
   document.querySelector(".totalActive").textContent = `Total active students: ${allStudents.length}`;
   document.querySelector(".totalExpelled").textContent = `Total expelled students: ${expelledStudents.length}`;
   document.querySelector(".nPrefects").textContent = `(${allPrefects.length})`;
-  let nGryff = allStudents.filter((student) => student.house === "Gryffindor");
+  let nGryff = activeStudents.filter((student) => student.house === "Gryffindor");
   document.querySelector(".nGryff").textContent = `(${nGryff.length})`;
   let nSly = allStudents.filter((student) => student.house === "Slytherin");
   document.querySelector(".nSly").textContent = `(${nSly.length})`;
@@ -146,8 +152,52 @@ function displayList(students) {
   document.querySelector(".nAll").textContent = `(${allStudents.length})`;
   document.querySelector(".nExpelled").textContent = `(${expelledStudents.length})`;
 
+  console.log(students.length);
+
   // build a new list
-  students.forEach(displayStudent);
+  let displayedStudents = students.slice((page - 1) * 10, (page - 1) * 10 + 10);
+  // console.log(students.slice(page - 1 * 10, page - 1 * 10 + 10));
+  // console.log(displayedStudents.length);
+
+  if (students.length >= 11) {
+    let firstNumber = (page - 1) * 10 + 1;
+    let secondNumber = (page - 1) * 10 + 1 + displayedStudents.length - 1;
+
+    if (secondNumber <= 0) {
+      firstNumber = 0;
+      secondNumber = 0;
+    }
+    if (firstNumber <= 0) {
+      firstNumber = 1;
+      secondNumber = displayedStudents.length;
+    }
+    document.querySelector(".displayedSt").innerHTML = `Showing ${firstNumber}-${secondNumber} of ${students.length} students`;
+  } else {
+    document.querySelector(".displayedSt").innerHTML = `Showing 1 -${students.length} of ${students.length} students`;
+    displayedStudents = students.slice(0, 10);
+  }
+
+  if (students.length < 10) {
+    document.querySelector(".minus").classList.add("hide");
+    document.querySelector(".more").classList.add("hide");
+  } else {
+    document.querySelector(".minus").classList.remove("hide");
+    document.querySelector(".more").classList.remove("hide");
+  }
+  displayedStudents.forEach(displayStudent);
+}
+
+function pagination() {
+  document.querySelector(".minus").addEventListener("click", substractPage);
+  document.querySelector(".more").addEventListener("click", addPage);
+
+  function substractPage() {
+    document.querySelector(".minus").setAttribute("href", `cleaningData.html?page=${prevPage}`);
+  }
+  function addPage() {
+    document.querySelector(".more").setAttribute("href", `cleaningData.html?page=${postPage}`);
+  }
+  buildList();
 }
 
 function displayStudent(student) {
@@ -233,11 +283,6 @@ function clickViewMore(student) {
       });
     }
   }
-  // } else if{
-  //   clone2.querySelector(".appoint").addEventListener("click", function () {
-  //     toggleInqMember(student);
-  //   });
-  // }
 
   if (student.prefect === false) {
     clone2.querySelector(".medal").style.opacity = "0.5";
@@ -373,19 +418,19 @@ function createList() {
 // filter houses
 function filterList(filteredList) {
   if (settings.filterBy === "Gryffindor") {
-    filteredList = allStudents.filter(isGryffindor);
+    filteredList = activeStudents.filter(isGryffindor);
   } else if (settings.filterBy === "Slytherin") {
-    filteredList = allStudents.filter(isSlytherin);
+    filteredList = activeStudents.filter(isSlytherin);
   } else if (settings.filterBy === "Ravenclaw") {
-    filteredList = allStudents.filter(isRavenclaw);
+    filteredList = activeStudents.filter(isRavenclaw);
   } else if (settings.filterBy === "Hufflepuff") {
-    filteredList = allStudents.filter(isHufflepuff);
+    filteredList = activeStudents.filter(isHufflepuff);
   } else if (settings.filterBy === "*") {
-    filteredList = allStudents.filter(isNotExpelled);
+    filteredList = activeStudents.filter(isNotExpelled);
   } else if (settings.filterBy === "expelled") {
     filteredList = allStudents.filter(isExpelled);
   } else if (settings.filterBy === "prefect") {
-    filteredList = allStudents.filter(isPrefect);
+    filteredList = activeStudents.filter(isPrefect);
   }
   return filteredList;
 }
@@ -544,6 +589,7 @@ function hackTheSystem() {
   if (!activeStudents.includes(me)) {
     activeStudents.unshift(me);
     playHackingEffects();
+    registerButtons();
     buildList();
   } else {
     window.alert("How many times do you wanna hack the system?");

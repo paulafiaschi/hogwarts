@@ -63,6 +63,7 @@ thead {
 }
 
 th {
+  height: 2rem;
   color: white;
 }
 
@@ -87,7 +88,7 @@ tr:hover {
 main {
   display: grid;
   grid-template-columns: 1fr 5fr;
-  gap: 2rem;
+  column-gap: 2rem;
 }
 .filters {
   display: flex;
@@ -406,4 +407,24 @@ input {
   margin-left: auto;
   cursor: help;
   justify-self: flex-end;
+}
+
+.pag {
+  float: right;
+  padding-right: 0.5rem;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.pag a {
+  font-size: 0.75rem;
+  color: black;
+  margin: 0.5rem;
+  padding: 0;
+}
+
+.loader {
+  height: 30vh;
+  background-color: #fcce0b;
 }

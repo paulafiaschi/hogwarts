@@ -15,7 +15,7 @@
 <body>
 
   <header>
-    <img src="img/hp-crest.png" alt="logo">
+    <a href="index.html"><img src="img/hp-crest.png" alt="logo"></a>
     <h1>Hogwarts Student Database</h1>
     <div class="hackbutton">Do not click here</div>
 
@@ -27,6 +27,11 @@
       <input type="text" id="searchBar" onkeyup="search()" placeholder="Search...">
       <p class="totalActive">Total active students:</p>
       <p class="totalExpelled">Total expelled students:</p>
+      <div class="pag">
+
+        <p class="displayedSt">Total expelled students:</p>
+        <a href="#" class="minus">&laquo;</a><a href="#" class="more">&raquo;</a>
+      </div>
     </div>
 
     <div class="filters">
@@ -66,7 +71,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- animal template will be copied and inserted here -->
+        <!-- student template will be copied and inserted here -->
       </tbody>
     </table>
 
