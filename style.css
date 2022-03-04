@@ -46,6 +46,10 @@ header {
   margin-bottom: 2rem;
   background-color: rgb(105, 4, 4);
 }
+
+header a {
+  margin: 0;
+}
 header img {
   height: 6vw;
 }
