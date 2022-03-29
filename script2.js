@@ -203,6 +203,7 @@ function clickViewMore(student) {
   clone2.querySelector(".alias").innerHTML = ` <em>${student.nickname} </em>`;
   clone2.querySelector(".alias").style.fontSize = "1rem";
   clone2.querySelector(".surname").textContent = student.lastName;
+  clone2.querySelector(".house").textContent = student.house;
   clone2.querySelector(".crest").setAttribute("src", "img/" + student.house + "-crest.png");
   clone2.querySelector(".crest").setAttribute("alt", student.house + "House Crest");
   clone2.querySelector(".st-picture").setAttribute("src", "img/students/" + picSource + ".png");
