@@ -51,6 +51,7 @@ function start() {
 
   loadJSON1();
   registerButtons();
+  document.querySelector(".mob-filters-button").addEventListener("click", openFilters);
   document.querySelector(".hackbutton").addEventListener("click", hackTheSystem);
 }
 
@@ -617,4 +618,20 @@ function playHackingEffects() {
     document.querySelector("#blackScreen").classList.add("hide");
     document.querySelector("main").classList.add("blink");
   }
+}
+
+function openFilters() {
+  console.log("filters clicked");
+  document.querySelector("#filtersList").classList.remove("hide");
+  document.querySelector("#filtersList").classList.add("flex");
+  document.querySelector(".mob-filters-button").removeEventListener("click", openFilters);
+  document.querySelector(".mob-filters-button").addEventListener("click", closeFilters);
+  document.querySelector("#filtersList").addEventListener("click", closeFilters);
+}
+function closeFilters() {
+  console.log("filters closed");
+  document.querySelector("#filtersList").classList.add("hide");
+  document.querySelector("#filtersList").classList.remove("flex");
+  document.querySelector(".mob-filters-button").removeEventListener("click", closeFilters);
+  document.querySelector(".mob-filters-button").addEventListener("click", openFilters);
 }

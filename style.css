@@ -138,6 +138,10 @@ main {
   display: block;
 }
 
+.flex {
+  display: flex;
+}
+
 td[data-field="prefect"] img {
   width: 3rem;
 }
@@ -481,7 +485,7 @@ input {
   }
 
   .filters {
-    display: none;
+    /* display: none; */
     position: absolute;
     left: 0vw;
     top: 28vh;
@@ -495,6 +499,7 @@ input {
 
   #list {
     margin-top: 1.5rem;
+    width: 97vw;
   }
   th[data-sort="mName"],
   th[data-sort="aliasName"] {
@@ -510,9 +515,7 @@ input {
   td {
     border: none;
   }
-  /* td[data-field="firstName"] {
-    width: 50%;
-  } */
+
   tr,
   tr:nth-child(even) {
     background-color: white;
