@@ -432,3 +432,133 @@ input {
   padding-right: 0.5rem;
   font-size: 0.75rem;
 }
+
+@media only screen and (max-width: 600px) {
+  header {
+    gap: 0;
+    justify-content: space-evenly;
+    padding: 0 0.5rem;
+  }
+
+  header a {
+    display: none;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .hackbutton {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  input {
+    height: 2rem;
+  }
+
+  .totalActive,
+  .totalExpelled {
+    margin: 0.3rem;
+  }
+
+  main {
+    display: block;
+  }
+
+  .displaySt {
+    margin-top: 2rem;
+  }
+  .mob-filters-button {
+    display: flex;
+    align-items: center;
+    background-color: #fcce0b;
+    padding: 0.5rem;
+    width: fit-content;
+    border-radius: 0.3rem;
+    margin-top: 1.5rem;
+    position: relative;
+    font-size: 1.2rem;
+  }
+
+  .filters {
+    display: none;
+    position: absolute;
+    left: 0vw;
+    top: 28vh;
+    z-index: 99;
+    width: 97vw;
+  }
+  .filters button {
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  #list {
+    margin-top: 1.5rem;
+  }
+  th[data-sort="mName"],
+  th[data-sort="aliasName"] {
+    display: none;
+  }
+  th {
+    display: none;
+  }
+  td[data-field="middleName"],
+  td[data-field="nickname"] {
+    display: none;
+  }
+  td {
+    border: none;
+  }
+  /* td[data-field="firstName"] {
+    width: 50%;
+  } */
+  tr,
+  tr:nth-child(even) {
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 1rem;
+    margin: 0.75rem 0;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 10px rgba(216, 214, 214, 0.733);
+  }
+
+  td[data-field="lastName"],
+  td[data-field="firstName"] {
+    font-weight: 600;
+  }
+
+  .window {
+    width: 100vw;
+    height: 90vh;
+    top: 5vh;
+  }
+
+  .textDesc {
+    display: block;
+    margin: 1rem;
+    padding: 1.5rem;
+    width: 70vw;
+    height: fit-content;
+  }
+
+  .closebutton {
+    font-size: 2rem;
+  }
+
+  .badges {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 2rem;
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+    justify-content: space-between;
+  }
+
+  .badges img {
+    min-height: 10vw;
+  }
+}
