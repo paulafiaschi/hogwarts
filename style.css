@@ -499,6 +499,7 @@ input {
 
   main {
     display: block;
+    padding: 0.3rem;
   }
 
   input {
@@ -533,7 +534,7 @@ input {
   .filters {
     position: absolute;
     left: 0vw;
-    top: 16.5vh;
+    top: 19.5vh;
     z-index: 99;
     width: 97vw;
     background-color: rgb(105, 4, 4);
@@ -555,6 +556,10 @@ input {
   #list {
     margin-top: 1.5rem;
     width: 97vw;
+    background: none;
+  }
+  thead {
+    display: none;
   }
   th[data-sort="mName"],
   th[data-sort="aliasName"] {
