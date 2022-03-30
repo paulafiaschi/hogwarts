@@ -26,16 +26,17 @@
 
   <main>
     <div id="summary">
-      <input type="text" id="searchBar" onkeyup="search()" placeholder="Search...">
       <p class="totalActive">Total active students:</p>
       <p class="totalExpelled">Total expelled students:</p>
       <p class="displaySt">Currently displaying:</p>
+      <input type="text" id="searchBar" onkeyup="search()" placeholder="Search...">
     </div>
 
     <div class="mob-filters-button">Filter <span class="material-icons-outlined">
         filter_alt
       </span></div>
     <div id="filtersList" class="filters">
+      <h4>Filters</h4>
       <button class="filter" data-action="filter" data-filter="*">All Active Students <span
           class="nAll"></span></button>
       <button class="filter" data-action="filter" data-filter="expelled">Expelled <span
@@ -57,7 +58,7 @@
     <table id="list">
       <thead>
         <tr id="sorting">
-          <th data-action="sort" data-sort-direction="asc" data-sort="prefect">prefect</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="lastName">Last Name</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="firstName">First Name</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="mName">Middle Name</th>
