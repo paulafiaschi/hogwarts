@@ -68,6 +68,7 @@ thead {
 
 th {
   color: white;
+  cursor: pointer;
 }
 
 td,
@@ -93,6 +94,11 @@ main {
   grid-template-columns: 1fr 5fr;
   column-gap: 2rem;
 }
+
+.mob-filters-button {
+  display: none;
+}
+
 .filters {
   display: flex;
   flex-direction: column;
@@ -110,7 +116,7 @@ main {
 }
 
 .filters button:hover {
-  background-color: greenyellow;
+  background-color: rgb(59, 1, 1);
 }
 
 #summary {
@@ -383,7 +389,7 @@ a:hover {
   font-size: 1rem;
   margin: 0;
   padding: 0;
-  color: rgb(255, 255, 255);
+  color: rgb(105, 4, 4);
   margin-left: 1rem;
 }
 
