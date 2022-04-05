@@ -113,6 +113,10 @@ main {
   background-color: greenyellow;
 }
 
+.mob-filters-button {
+  display: none;
+}
+
 #summary {
   grid-column: 2/-1;
 }
@@ -488,7 +492,7 @@ input {
     /* display: none; */
     position: absolute;
     left: 0vw;
-    top: 28vh;
+    top: 35vh;
     z-index: 99;
     width: 97vw;
   }
