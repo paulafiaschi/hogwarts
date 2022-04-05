@@ -473,15 +473,17 @@ input {
     padding: 0 0.5rem;
   }
 
-  header a {
+  header h1 {
     display: none;
   }
-  h1 {
-    font-size: 1.5rem;
+  header img {
+    height: 3.5rem;
+    width: 3.5rem;
   }
 
   .hackbutton {
     padding: 0.5rem;
+    margin-right: 1rem;
     font-size: 0.75rem;
   }
 
@@ -569,15 +571,14 @@ input {
   }
 
   .window {
-    width: 100vw;
-    height: 90vh;
-    top: 5vh;
+    height: 70vh;
+    top: 15vh;
   }
 
   .textDesc {
     display: block;
     margin: 1rem;
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
     width: 70vw;
     height: fit-content;
   }
